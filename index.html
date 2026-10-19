@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f7">
+  <meta name="description" content="OUPOS 免費開源 iPad POS，探索動態點餐、配料、現金找零、線上訂單與報表。了解三種規劃方案。">
+  <meta property="og:title" content="OUPOS — 把好用，做到每一步。">
+  <meta property="og:description" content="專為門市打造的免費開源 POS。滑動探索 OUPOS，親自體驗互動介面。">
+  <title>OUPOS — 把好用，做到每一步。</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pos-demo.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon-sprite" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-appstore" viewBox="0 0 24 24"><path d="m11 4 9 15M14 4 5 19m-1-5h16" stroke-width="2.7"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1"/><circle cx="19" cy="20" r="1"/><path d="M2 3h2l3 13h13l2-9H5"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3M5 12h14"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-4 5-4 13 0 18m0-18c4 5 4 13 0 18"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M7 15l4-4 3 3 6-7"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.2 15.3a8 8 0 0 0 .4-2l1.8-1.3-1.8-3.1-2.1.6a8 8 0 0 0-1.7-1L15.3 6h-3.6l-.5 2.5a8 8 0 0 0-1.7 1l-2.1-.6L5.6 12l1.8 1.3a8 8 0 0 0 .4 2l-1 1.9 2.6 2.6 1.9-1a8 8 0 0 0 2 .4l1.3 1.8 3.1-1.8-.6-2.1a8 8 0 0 0 1-1.7l2.5-.5z" transform="translate(-2 -1) scale(1.08)"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 5-6 7 6 7m8-14 6 7-6 7m-3-16-3 18"/></symbol>
+  <symbol id="i-coins" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.3 7.7L22 12l-7.7 2.3L12 22l-2.3-7.7L2 12l7.7-2.3z"/></symbol>
+</svg>
+<a class="skip-link" href="#main">跳至主要內容</a>
+<header class="global-nav" id="top">
+  <div class="nav-inner">
+    <button class="menu-toggle" aria-label="開啟網站選單" aria-controls="mobile-menu" aria-expanded="false"><svg class="icon"><use href="#i-menu"></use></svg></button>
+    <a href="#top" class="nav-logo" aria-label="OUPOS 首頁">oupos<span>.</span></a>
+    <nav class="nav-links" aria-label="主要導覽"><a href="#overview">概覽</a><a href="#cinema">探索操作</a><a href="#features">功能</a><a href="#demo">實際體驗</a><a href="#pricing">方案與價格</a><a href="#opensource">開源</a></nav>
+    <a href="#download" class="nav-download">下載 <svg class="icon"><use href="#i-chevron"></use></svg></a>
+  </div>
+  <nav id="mobile-menu" class="mobile-menu" aria-label="手機版導覽" hidden><a href="#overview">概覽</a><a href="#cinema">探索操作</a><a href="#features">功能</a><a href="#demo">實際體驗</a><a href="#pricing">方案與價格</a><a href="#opensource">開源</a><a href="#download">下載</a></nav>
+</header>
+<div class="product-nav"><div class="product-nav-inner"><a class="product-nav-name" href="#top">OUPOS <span>POS</span></a><div class="product-nav-right"><a href="#cinema" class="product-nav-link">功能亮點</a><a href="#pricing" class="product-nav-link">方案比較</a><a href="#download" class="pill pill-small">免費取得</a></div></div></div>
+<main id="main">
+  <section class="hero section-tile" id="overview" aria-labelledby="hero-title">
+    <div class="hero-intro reveal"><div class="hero-eyebrow">為每一間用心經營的門市而設計</div><h1 id="hero-title">OUPOS。<br><span>把好用，做到每一步。</span></h1><p>專為 iPad 打造的 POS 系統。<br>點餐、收款、接單與報表，一切自然流暢。</p><div class="cta-row"><a class="pill" href="#download">免費下載 <svg class="icon"><use href="#i-chevron"></use></svg></a><a class="text-link" href="#cinema">進一步了解 <svg class="icon"><use href="#i-chevron"></use></svg></a></div><span class="hero-tag">目前免費開源 · 繁體中文 · iPad 橫向設計</span></div>
+    <div class="hero-product reveal" aria-label="OUPOS iPad POS 展示畫面"><div class="tablet-device hero-tablet"><div class="tablet-camera" aria-hidden="true"></div><div class="hero-app-crop"><div id="hero-pos" class="pos-app"></div></div></div></div>
+    <a href="#cinema" class="scroll-indicator">往下滑動，看看 OUPOS 有多順手 <span aria-hidden="true">↓</span></a>
+  </section>
+  <section class="intro-band section-tile" aria-labelledby="intro-title"><p class="eyebrow reveal">一切，從操作開始。</p><h2 id="intro-title" class="reveal">好的 POS，不該讓你<br><span>多花一秒思考。</span></h2><p class="reveal">大而清楚的操作區域、直覺的流程、隨時掌握的購物車。<br>讓每天重複上百次的動作，都變得輕鬆。</p></section>
+  <section id="cinema" class="cinema-section" aria-labelledby="cinema-title">
+    <div class="cinema-heading"><p class="eyebrow">SCROLL TO EXPLORE</p><h2 id="cinema-title">每一步，都看得見。</h2><p>繼續往下捲動，OUPOS 會跟著你完成一筆訂單。</p></div>
+    <div id="story-track" class="story-track" data-scene="0">
+      <div class="story-sticky">
+        <div class="story-inner">
+          <div class="story-copy" aria-live="polite" aria-atomic="true">
+            <span class="story-index"><span id="story-number">01</span> / 06</span>
+            <div class="story-wording" id="story-wording"><p class="story-kicker" id="story-kicker">快速點餐</p><h3 id="story-title">點一下，<br>就加入購物車。</h3><p id="story-description">商品分類與購物車同時呈現。不必在頁面間來回跳轉。</p></div>
+            <div class="story-meter" role="progressbar" aria-label="操作展示進度" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" id="story-progressbar"><span id="story-progress-fill"></span></div>
+            <div class="story-controls"><button type="button" id="story-prev" aria-label="上一個操作步驟"><span>←</span></button><button type="button" id="story-next" aria-label="下一個操作步驟"><span>→</span></button><small>捲動或使用方向鍵探索</small></div>
+          </div>
+          <div class="story-product"><div class="tablet-device story-tablet"><div class="tablet-camera" aria-hidden="true"></div><div class="story-screen-slot"><div id="story-pos" class="pos-app story-pos"></div></div></div><div class="story-glow-label" id="story-callout"><span class="callout-dot"></span>即時操作展示</div><div class="story-background-word" aria-hidden="true">OUPOS</div></div>
+        </div>
+        <div class="story-bottom"><span>OUPOS / PRODUCT TOUR</span><span>以下皆為模擬資料，沒有實際交易</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="wide-tile tile-dark feature-focus" id="features" aria-labelledby="features-title"><div class="focus-copy reveal"><p class="eyebrow">所有重要的功能，一次到位。</p><h2 id="features-title">小小一台 iPad。<br>掌握整間店。</h2><p>從現場到線上，從下單到統計。資訊在該出現的位置，操作就在指尖。</p><a class="text-link on-dark" href="#demo">親自體驗 <svg class="icon"><use href="#i-chevron"></use></svg></a></div><div class="feature-grid"><article class="feature-card reveal"><span class="feature-icon"><svg class="icon"><use href="#i-cart"></use></svg></span><h3>三欄快速點餐</h3><p>分類、商品、購物車同時顯示，配料直接操作。</p><span class="feature-no">01</span></article><article class="feature-card reveal"><span class="feature-icon"><svg class="icon"><use href="#i-coins"></use></svg></span><h3>清楚的現金找零</h3><p>數字鍵盤輸入實收，立即呈現找零或尚差金額。</p><span class="feature-no">02</span></article><article class="feature-card reveal"><span class="feature-icon"><svg class="icon"><use href="#i-globe"></use></svg></span><h3>線上訂單管理</h3><p>待處理訂單、商品明細與接單動作集中呈現。</p><span class="feature-no">03</span></article><article class="feature-card reveal"><span class="feature-icon"><svg class="icon"><use href="#i-chart"></use></svg></span><h3>營業分析報表</h3><p>查看營業額、訂單數、各付款方式與訂單詳情。</p><span class="feature-no">04</span></article></div></section>
+  <section class="live-demo section-tile" id="demo" aria-labelledby="demo-title"><div class="section-head reveal"><p class="eyebrow">互動體驗</p><h2 id="demo-title">現在，就試試看。</h2><p>在網頁中直接點選商品、調整配料、選擇現金、計算找零。<br>切換到掃碼、線上訂單或報表，看看更多操作可能。</p></div><div class="demo-wrapper reveal"><div class="demo-toolbar"><span><i></i> OUPOS LIVE PREVIEW</span><span>可互動的模擬介面</span></div><div class="demo-tabs" role="tablist" aria-label="POS 頁面切換"><button type="button" role="tab" class="showcase-option active" data-view="order" aria-selected="true">點餐</button><button type="button" role="tab" class="showcase-option" data-view="checkout" aria-selected="false">結帳</button><button type="button" role="tab" class="showcase-option" data-view="online" aria-selected="false">線上訂單</button><button type="button" role="tab" class="showcase-option" data-view="reports" aria-selected="false">報表</button><button type="button" role="tab" class="showcase-option" data-view="scan" aria-selected="false">掃碼</button><button type="button" role="tab" class="showcase-option" data-view="settings" aria-selected="false">設定</button></div><div class="demo-scroll"><div id="showcase-pos" class="pos-app" aria-label="可操作的 OUPOS 示範 POS"></div></div><div class="demo-note"><span>展示環境不會下單、扣款或連線至真實門市。</span><span>手機可在示範區左右滑動 →</span></div></div></section>
+  <section class="statement section-tile"><p class="eyebrow reveal">OUPOS，為日常而設計。</p><h2 class="reveal">專注每一筆訂單。<br><span>其餘的，交給更順手的工具。</span></h2></section>
+  <section class="pricing-section section-tile" id="pricing" aria-labelledby="pricing-title"><div class="section-head reveal"><p class="eyebrow">PLANS & PRICING</p><h2 id="pricing-title">選擇適合你的方式。</h2><p>OUPOS 目前免費開源。以下另外兩種方案為網站展示用的服務規劃範例，<br>尚未正式推出，也尚未訂定價格。</p></div><div class="pricing-grid">
+    <article class="plan-card reveal"><div class="plan-top"><span class="plan-kicker">01 / COMMUNITY</span><h3>開源社群版</h3><p>喜歡自己掌握系統，從最基本的工具開始。</p></div><div class="plan-price"><strong>NT$0</strong><span>目前免費</span></div><div class="plan-divider"></div><ul><li>OUPOS 開源程式與專案資源</li><li>以 iPad 門市操作為設計核心</li><li>依公開文件自行部署與設定</li><li>社群與公開更新資訊</li></ul><a href="#download" class="pill plan-cta">取得開源版 <svg class="icon"><use href="#i-chevron"></use></svg></a><small>實際授權與適用範圍以公開專案條款為準。</small></article>
+    <article class="plan-card plan-featured reveal"><div class="plan-top"><span class="plan-kicker">02 / PROFESSIONAL <em>規劃示意</em></span><h3>專業支援版</h3><p>需要更省心的設定、導入與技術協助。</p></div><div class="plan-price"><strong>價格待定</strong><span>尚未正式推出</span></div><div class="plan-divider"></div><ul><li>開源版的基本產品體驗</li><li>部署與設定協助（規劃項目）</li><li>營運使用支援（規劃項目）</li><li>進階服務內容待公告</li></ul><button type="button" class="pill plan-cta" data-plan-dialog="professional">了解規劃進度 <svg class="icon"><use href="#i-chevron"></use></svg></button><small>方案內容、價格與提供時間均未確認。</small></article>
+    <article class="plan-card reveal"><div class="plan-top"><span class="plan-kicker">03 / BUSINESS <em>規劃示意</em></span><h3>多店營運版</h3><p>面向更多門市與進階營運管理需求。</p></div><div class="plan-price"><strong>價格待定</strong><span>尚未正式推出</span></div><div class="plan-divider"></div><ul><li>包含基本 POS 操作理念</li><li>跨門市管理（構想階段）</li><li>營運資料彙整（構想階段）</li><li>整合與支援方式待規劃</li></ul><button type="button" class="pill pill-outline plan-cta" data-plan-dialog="business">了解規劃進度 <svg class="icon"><use href="#i-chevron"></use></svg></button><small>所列功能為提案方向，非現有產品承諾。</small></article>
+  </div>
+  <div class="comparison reveal"><div class="comparison-head"><h3>三種方案，一目了然。</h3><p>「待規劃」不代表已提供；正式服務內容仍以未來公告為準。</p></div><div class="table-scroll"><table class="comparison-table"><thead><tr><th scope="col">比較項目</th><th scope="col">開源社群版</th><th scope="col">專業支援版</th><th scope="col">多店營運版</th></tr></thead><tbody><tr><th scope="row">目前狀態</th><td><span class="mark-confirmed">已提供</span></td><td>方案構想</td><td>方案構想</td></tr><tr><th scope="row">目前價格</th><td>NT$0</td><td>未定價</td><td>未定價</td></tr><tr><th scope="row">開源 POS 本體</th><td>依公開專案</td><td>規劃沿用</td><td>規劃沿用</td></tr><tr><th scope="row">部署與設定支援</th><td>自行處理</td><td>擬提供服務</td><td>依需求規劃</td></tr><tr><th scope="row">營運技術支援</th><td>公開資源</td><td>擬納入方案</td><td>依需求規劃</td></tr><tr><th scope="row">多店管理功能</th><td>未在此承諾</td><td>未在此承諾</td><td>構想階段</td></tr><tr><th scope="row">適合對象</th><td>想自由探索的單店</td><td>希望有支援的店家</td><td>有多門市需求的團隊</td></tr></tbody></table></div></div>
+  </section>
+  <section class="opensource-section tile-dark section-tile" id="opensource" aria-labelledby="opensource-title"><div class="open-copy reveal"><p class="eyebrow">OPEN SOURCE. OPEN POSSIBILITIES.</p><h2 id="opensource-title">現在免費。<br><span>也開放更多可能。</span></h2><p>OUPOS 目前採免費開源方式提供。讓更多門市能探索適合自己的工具，也讓改善從分享開始。</p><div class="cta-row"><a class="pill pill-light" href="#download">取得 OUPOS <svg class="icon"><use href="#i-chevron"></use></svg></a><a class="text-link on-dark" href="#download">查看原始碼 <svg class="icon"><use href="#i-chevron"></use></svg></a></div></div><div class="open-symbol" aria-hidden="true">o<span>u</span>pos.</div></section>
+  <section class="faq-section section-tile" id="faq" aria-labelledby="faq-title"><div class="faq-container"><div class="section-head reveal"><p class="eyebrow">FAQ</p><h2 id="faq-title">你可能想知道的事。</h2></div><div class="faq-list reveal"><details><summary>OUPOS 現在真的免費嗎？ <span>＋</span></summary><p>目前 OUPOS 為免費開源專案。未來如果推出付費服務方案，將另行公告，與目前開源版區分。</p></details><details><summary>三種方案都已經可以購買嗎？ <span>＋</span></summary><p>不是。現在確認的只有免費開源版；專業支援版和多店營運版是展示用規劃範例，尚未推出或定價。</p></details><details><summary>支援 iPhone 嗎？ <span>＋</span></summary><p>目前 POS 的操作版面以 iPad 橫向為主要設計情境。其他裝置的適用性，請依實際版本與上架資訊確認。</p></details><details><summary>可以直接用網站上的示範結帳嗎？ <span>＋</span></summary><p>網站示範只用來體驗介面，不會連線至實際收款、訂單或門市資料。</p></details></div></div></section>
+  <section class="download-section section-tile" id="download" aria-labelledby="download-title"><div class="reveal"><p class="eyebrow">GET STARTED</p><h2 id="download-title">讓下一筆訂單，<br>從這裡開始。</h2><p>了解 OUPOS、下載 App，或探索開源專案。</p><div class="cta-row download-ctas"><a href="#download" class="pill" data-external="appStore"><svg class="icon"><use href="#i-appstore"></use></svg> App Store 下載 <svg class="icon"><use href="#i-chevron"></use></svg></a><a href="#download" class="pill pill-outline" data-external="github"><svg class="icon"><use href="#i-code"></use></svg> GitHub 原始碼 <svg class="icon"><use href="#i-chevron"></use></svg></a></div><small>正式上架與原始碼網址須由網站管理者填入；未設定時不會導向未知頁面。</small></div></section>
+</main>
+<footer class="site-footer"><div class="footer-inner"><div class="footer-top"><a href="#top" class="footer-logo">oupos<span>.</span></a><div class="footer-nav"><a href="#overview">產品</a><a href="#features">功能</a><a href="#pricing">方案與價格</a><a href="#opensource">免費開源</a><a href="#faq">常見問題</a></div></div><div class="footer-bottom"><span>© <span id="year">2026</span> OUPOS</span><span>以設計稿打造的展示網站。功能以實際發行版本為準。</span><a href="#top">返回頂部 ↑</a></div></div></footer>
+<dialog id="info-dialog" class="info-dialog" aria-labelledby="info-dialog-title"><button class="dialog-close" id="dialog-close" aria-label="關閉">×</button><p class="eyebrow">OUPOS</p><h2 id="info-dialog-title">正式連結尚未設定</h2><p id="info-dialog-body">請先設定連結。</p><button type="button" class="pill" id="dialog-ok">了解</button></dialog>
+</body>
+</html>
