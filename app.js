@@ -51,7 +51,7 @@ function createDemo(root){
     const now=new Date();
     const day=`${now.getFullYear()}/${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')}`;
     const clock=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-    return `<div class="pos-topbar"><div class="pos-top-left"><span class="pos-store">早美六甲</span><span class="pos-top-divider"></span><span class="pos-auto">自動接單</span><span class="pos-switch"></span></div><div class="pos-topnav">${Object.entries(viewLabels).map(([view,label])=>`<button type="button" class="pos-navbtn ${(state.view===view||(state.view==='checkout'&&view==='order'))?'active':''}" data-view="${view}" aria-label="示範：${label}">${icons(viewIcons[view])}<span>${label}</span>${view==='online'&&state.online.length?`<sup class="pos-badge">${state.online.length}</sup>`:''}</button>`).join('')}</div><div class="pos-clock"><span>${day}</span><strong>${clock}</strong></div></div>`;
+    return `<div class="pos-topbar"><div class="pos-top-left"><span class="pos-store">OUPOS｜Oupos早餐店</span><span class="pos-top-divider"></span><span class="pos-auto">自動接單</span><span class="pos-switch"></span></div><div class="pos-topnav">${Object.entries(viewLabels).map(([view,label])=>`<button type="button" class="pos-navbtn ${(state.view===view||(state.view==='checkout'&&view==='order'))?'active':''}" data-view="${view}" aria-label="示範：${label}">${icons(viewIcons[view])}<span>${label}</span>${view==='online'&&state.online.length?`<sup class="pos-badge">${state.online.length}</sup>`:''}</button>`).join('')}</div><div class="pos-clock"><span>${day}</span><strong>${clock}</strong></div></div>`;
   }
   function cart(){
     const checkout=state.view==='checkout';
