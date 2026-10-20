@@ -74,7 +74,7 @@
             <div class="story-meter" role="progressbar" aria-label="操作展示進度" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" id="story-progressbar"><span id="story-progress-fill"></span></div>
             <div class="story-controls"><button type="button" id="story-prev" aria-label="上一個操作步驟"><span>←</span></button><button type="button" id="story-next" aria-label="下一個操作步驟"><span>→</span></button><small>捲動或使用方向鍵探索</small></div>
           </div>
-          <div class="story-product"><div class="tablet-device story-tablet"><div class="tablet-camera" aria-hidden="true"></div><div class="story-screen-slot" aria-hidden="true"><div id="story-scene-0" class="pos-app story-pos story-layer" data-scene-canvas="0" inert></div><div id="story-scene-1" class="pos-app story-pos story-layer" data-scene-canvas="1" inert></div><div id="story-scene-2" class="pos-app story-pos story-layer" data-scene-canvas="2" inert></div><div id="story-scene-3" class="pos-app story-pos story-layer" data-scene-canvas="3" inert></div><div id="story-scene-4" class="pos-app story-pos story-layer" data-scene-canvas="4" inert></div><div id="story-scene-5" class="pos-app story-pos story-layer" data-scene-canvas="5" inert></div></div></div><div class="story-background-word" aria-hidden="true">OUPOS</div></div>
+          <div class="story-product"><div class="tablet-device story-tablet"><div class="tablet-camera" aria-hidden="true"></div><div class="story-screen-slot"><img id="story-image" class="story-preview-image" src="assets/tour-01.webp" width="1040" height="570" alt="OUPOS POS 點餐操作展示" decoding="sync"></div></div><div class="story-background-word" aria-hidden="true">OUPOS</div></div>
         </div>
         <div class="story-bottom"><span>OUPOS / PRODUCT TOUR</span><span>每一步操作，都自在順手</span></div>
       </div>
@@ -127,24 +127,48 @@
       <tr><th scope="row">Uber Eats 串接</th><td>—</td><td>可加購</td><td>可加購</td></tr>
       </tbody></table></div></div>
     <div class="addons" id="addons" aria-labelledby="addons-title">
-      <div class="addons-heading reveal"><p class="eyebrow">OPTIONAL ADD-ONS</p><h3 id="addons-title">需要更多功能？<br><span>模組自由加購。</span></h3><p>僅限 Plus、Pro 版本選購。金流模組一次性收費；Uber Eats 串接按月收費。</p></div>
+      <div class="section-head reveal addons-heading">
+        <p class="eyebrow">OPTIONAL ADD-ONS</p>
+        <h3 id="addons-title">模組自由加購。</h3>
+        <p>為 Plus 與 Pro 加上更多能力。依照門市需求選擇，費用一目了然。</p>
+      </div>
       <div class="addon-grid">
-        <article class="addon-card reveal" id="addon-payments" aria-labelledby="addon-payments-title">
-          <div class="addon-card-top"><span class="addon-icon"><svg class="icon"><use href="#i-coins"></use></svg></span><span class="addon-tag">一次性付費</span></div>
-          <h4 id="addon-payments-title">金流整合模組</h4>
-          <p>全支付與 LINE Pay 可選擇加購，支援 POS 掃碼付款及線上付款整合。</p>
-          <div class="addon-price-options"><div><span>任選 1 個模組</span><strong>NT$500 <small>/ 一次</small></strong></div><div class="addon-bundle"><span>兩個模組一起購買</span><strong>NT$800 <small>/ 一次</small></strong></div></div>
-          <p class="addon-footnote">可加購項目：全支付、LINE Pay。費用為 OUPOS 模組價格，第三方金流手續費另依服務商規定。</p>
+        <article class="plan-card addon-plan reveal" id="addon-pxpay" aria-labelledby="addon-pxpay-title">
+          <div class="plan-top"><span class="plan-kicker">01 / PAYMENT</span>
+            <h3 id="addon-pxpay-title">全支付</h3>
+            <p>POS 掃碼與線上付款整合，讓顧客用熟悉的方式完成付款。</p>
+          </div>
+          <div class="plan-price"><strong>NT$500 <span class="price-period">／一次</span></strong><span>一次性模組費用</span></div>
+          <div class="plan-divider"></div>
+          <ul><li>POS 掃碼收款</li><li>線上付款串接</li><li>Plus、Pro 皆可加購</li></ul>
+          <small>第三方金流手續費另計。</small>
         </article>
-        <article class="addon-card reveal" id="addon-ubereats" aria-labelledby="addon-ubereats-title">
-          <div class="addon-card-top"><span class="addon-icon"><svg class="icon"><use href="#i-globe"></use></svg></span><span class="addon-tag">每月訂閱</span></div>
-          <h4 id="addon-ubereats-title">Uber Eats 串接</h4>
-          <p>將 Uber Eats 訂單串接至 OUPOS，減少多平台切換，方便門市處理外送訂單。</p>
-          <div class="addon-single-price"><strong>NT$99 <small>/ 月</small></strong></div>
-          <p class="addon-footnote">此為 OUPOS 串接模組月費，不包含 Uber Eats 平台本身的服務費或抽成。</p>
+        <article class="plan-card addon-plan reveal" id="addon-linepay" aria-labelledby="addon-linepay-title">
+          <div class="plan-top"><span class="plan-kicker">02 / PAYMENT</span>
+            <h3 id="addon-linepay-title">LINE Pay</h3>
+            <p>整合門市掃碼收款與線上付款，讓結帳流程更順手。</p>
+          </div>
+          <div class="plan-price"><strong>NT$500 <span class="price-period">／一次</span></strong><span>一次性模組費用</span></div>
+          <div class="plan-divider"></div>
+          <ul><li>POS 掃碼收款</li><li>線上付款串接</li><li>Plus、Pro 皆可加購</li></ul>
+          <small>第三方金流手續費另計。</small>
+        </article>
+        <article class="plan-card addon-plan reveal" id="addon-ubereats" aria-labelledby="addon-ubereats-title">
+          <div class="plan-top"><span class="plan-kicker">03 / DELIVERY</span>
+            <h3 id="addon-ubereats-title">Uber Eats</h3>
+            <p>串接外送平台訂單，減少多個後台來回切換。</p>
+          </div>
+          <div class="plan-price"><strong>NT$99 <span class="price-period">／月</span></strong><span>按月訂閱</span></div>
+          <div class="plan-divider"></div>
+          <ul><li>Uber Eats 訂單串接</li><li>門市訂單集中處理</li><li>Plus、Pro 皆可加購</li></ul>
+          <small>外送平台服務費與抽成另計。</small>
         </article>
       </div>
-      <div class="addon-service-note reveal"><span class="addon-service-icon"><svg class="icon"><use href="#i-check"></use></svg></span><p><strong>Plus、Pro 均包含設備部署設定、操作教學與專屬客服。</strong><br>加購模組依門市需求選擇，不需要一次全部購買。</p></div>
+      <div class="addon-bundle-bar reveal" id="addon-payments">
+        <div class="addon-bundle-copy"><span class="plan-kicker">PAYMENT BUNDLE</span><h4>兩個金流模組，一起更划算。</h4><p>全支付 + LINE Pay，一次加購兩個付款模組。</p></div>
+        <div class="addon-bundle-price"><strong>NT$800</strong><span>合購一次性費用</span></div>
+      </div>
+      <p class="addon-bottom-note">Plus、Pro 均包含設備部署設定、操作教學與專屬客服；模組費用另計。</p>
     </div>
   </section>
   <section class="opensource-section tile-dark section-tile" id="opensource" aria-labelledby="opensource-title"><div class="open-copy reveal"><p class="eyebrow">OPEN SOURCE. OPEN POSSIBILITIES.</p><h2 id="opensource-title">現在免費。<br><span>也開放更多可能。</span></h2><p>OUPOS 目前採免費開源方式提供。讓更多門市能探索適合自己的工具，也讓改善從分享開始。</p><div class="cta-row"><a class="pill pill-light" href="#download">取得 OUPOS <svg class="icon"><use href="#i-chevron"></use></svg></a><a class="text-link on-dark" href="#download">查看原始碼 <svg class="icon"><use href="#i-chevron"></use></svg></a></div></div><div class="open-symbol" aria-hidden="true">o<span>u</span>pos.</div></section>

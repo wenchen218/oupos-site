@@ -18,7 +18,8 @@ OUPOS-website/
 ├── llms.txt            # AI 可閱讀的產品與價格摘要（非通用標準）
 ├── assets/
 │   ├── favicon.svg
-│   └── og-oupos.png     # 1200×630 社群分享圖
+│   ├── og-oupos.png     # 1200×630 社群分享圖
+│   └── tour-01.webp ～ tour-06.webp  # 六段實際 POS 展示畫面
 └── README.md
 ```
 
@@ -68,7 +69,7 @@ OUPOS-website/
 
 ## 已修復「每一步，都看得見」白畫面
 
-六個場景於載入時一次建立 `#story-scene-0` 至 `#story-scene-5`。捲動時**只切換可見度，不再在切換動畫途中動態重建商品卡片、結帳頁或報表頁**。若 JavaScript 因網路中斷未載入，CSS 仍會保留第一個場景的空間背景；正常載入後會呈現全部六個畫面。
+改成六張預先匯出的 OUPOS POS 操作畫面 WebP，捲動時只更新**單一圖片元素**，不再同時維護六個巨大 DOM 畫面，也不重建結帳或報表元件。`fitStory()` 為 iPhone Safari 明確設定螢幕區高度（寬度 × 570/1040），防止平板內容坍縮成一條黑色邊框。即使 JavaScript 未載入也會顯示第 01 張展示圖片；正常載入後會依序呈現全部六個畫面。
 
 現場交易功能**只由真正的 iPad POS App 處理**；官網展示所使用的資料與 POS 操作不會連線到你的正式付款或訂單 API。
 
@@ -102,3 +103,13 @@ python3 -m http.server 8080
 ```
 
 開啟 `http://localhost:8080`，注意 Python 內建靜態伺服器可能不自動將 `/privacy` 導向 `privacy.html`；需要在 Cloudflare Pages 或設定好路由的 Nginx 下測試乾淨網址。
+
+
+## 捲動展示（iPhone Safari 相容版）
+
+`assets/tour-01.webp` 至 `tour-06.webp` 為由 OUPOS POS 示範 UI 直接產生的展示圖片。
+網站會依六段捲動位置切換同一個 `#story-image` 的圖片；`fitStory()` 額外設定
+畫面高度，以避免某些 iOS Safari 版本將平板內容壓扁。
+若未來更改 POS 介面，請同步更新這六張圖片，並維持 1040×570 長寬比。
+
+模組加購卡片直接沿用 `.plan-card` 結構，與免費、Plus、Pro 方案一致。

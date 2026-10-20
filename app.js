@@ -234,7 +234,7 @@ function createDemo(root){
 
 /* ---------- Product-site interactions ---------- */
 const demos={};
-for(const id of ['hero-pos',...Array.from({length:6},(_,i)=>`story-scene-${i}`)]){
+for(const id of ['hero-pos']){
   const el=document.getElementById(id);
   if(el)demos[id]=createDemo(el);
 }
@@ -271,31 +271,27 @@ const storyKicker=document.getElementById('story-kicker');
 const storyNumber=document.getElementById('story-number');
 const storyFill=document.getElementById('story-progress-fill');
 const storyBar=document.getElementById('story-progressbar');
-const storyLayers=Array.from({length:6},(_,i)=>({
-  el:document.getElementById(`story-scene-${i}`),
-  demo:demos[`story-scene-${i}`],
-  scene:i
-}));
+const storyImage=document.getElementById('story-image');
+const tourImages=Array.from({length:6},(_,i)=>`assets/tour-${String(i+1).padStart(2,'0')}.webp`);
+const tourAlt=[
+  'OUPOS POS 商品分類與商品網格',
+  'OUPOS POS 商品加入購物車與總計',
+  'OUPOS POS 調整配料、商品數量和價格',
+  'OUPOS POS 現金結帳與找零',
+  'OUPOS POS 線上訂單管理',
+  'OUPOS POS 營運報表與付款統計'
+];
+// Lightweight images prevent mobile Safari from flattening multiple scaled POS layers.
+for(const src of tourImages){const preload=new Image();preload.src=src;}
 let activeScene=-1,scrollQueued=false;
 const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
-const easeBlend=v=>v*v*(3-2*v);
-// All six screens exist from page load. Only opacity changes during scrolling.
-// Preloading prevents a briefly empty canvas while the next scene is constructed.
-function paintStoryLayers(scene,transition){
-  const t=(scene===storyLayers.length-1)?0:transition;
-  for(const layer of storyLayers){
-    if(!layer.el)continue;
-    const value=layer.scene===scene?1-t:(layer.scene===scene+1?t:0);
-    layer.el.style.opacity=String(value);
-    layer.el.style.visibility=value===0?'hidden':'visible';
-  }
-}
 function changeScene(scene){
   const n=clamp(scene,0,storySteps.length-1);
   if(n===activeScene)return;
   activeScene=n;
   const info=storySteps[n];
   storyTrack?.setAttribute('data-scene',String(n));
+  if(storyImage){storyImage.src=tourImages[n];storyImage.alt=tourAlt[n];}
   if(storyNumber)storyNumber.textContent=String(n+1).padStart(2,'0');
   if(storyKicker)storyKicker.textContent=info.kicker;
   if(storyTitle)storyTitle.innerHTML=info.title.replaceAll('\n','<br>');
@@ -319,8 +315,8 @@ function fitHero(){
 function fitStory(){
   const slot=document.querySelector('.story-screen-slot');
   if(!slot)return;
-  const scale=slot.clientWidth/1040;
-  for(const layer of storyLayers){if(layer.el)layer.el.style.transform=`scale(${scale})`;}
+  // Explicit height prevents iOS Safari from collapsing the frame to a thin black line.
+  slot.style.height=`${Math.round(slot.clientWidth*570/1040)}px`;
 }
 function getStoryDimensions(){
   if(!storyTrack)return {top:0,max:1};
@@ -334,16 +330,16 @@ function updateStory(){
   const {top,max}=getStoryDimensions();
   const progress=clamp((window.scrollY-top)/max,0,1);
   const step=Math.min(storySteps.length-1,Math.floor(progress*storySteps.length));
-  const fraction=Math.min(1,progress*storySteps.length-step);
-  // Hold each screen for most of the step, then crossfade for its final 32%.
-  // This remains tied to the actual scroll position, so it doesn't lag or jump.
-  const transition=(step===storySteps.length-1||lessMotion.matches)?0:easeBlend(clamp((fraction-.68)/.32,0,1));
-  paintStoryLayers(step,transition);
-  changeScene(step+(transition>=.5&&step<storySteps.length-1?1:0));
+  // Keep one physical image in the tablet so iOS can always paint it.
+  changeScene(step);
   if(storyFill)storyFill.style.transform=`scaleX(${progress})`;
-  if(storyTablet&&!lessMotion.matches){
-    const y=(1-progress)*10;
-    storyTablet.style.transform=`translate3d(0,${y.toFixed(2)}px,0) scale(${(.992+progress*.008).toFixed(4)})`;
+  if(storyTablet){
+    if(window.innerWidth>833&&!lessMotion.matches){
+      const y=(1-progress)*10;
+      storyTablet.style.transform=`translate3d(0,${y.toFixed(2)}px,0) scale(${(.992+progress*.008).toFixed(4)})`;
+    } else {
+      storyTablet.style.transform='none';
+    }
   }
 }
 function onScroll(){if(!scrollQueued){scrollQueued=true;requestAnimationFrame(updateStory);}}
@@ -361,7 +357,6 @@ if('ResizeObserver' in window){
   new ResizeObserver(fitHero).observe(document.querySelector('.hero-app-crop'));
 }
 // Prepare every operation screen once. No DOM changes inside the scrolling loop.
-for(const layer of storyLayers)layer.demo?.setStoryScene(layer.scene);
 fitStory();fitHero();onScroll();
 
 const SITE_DIALOG=document.getElementById('info-dialog');
