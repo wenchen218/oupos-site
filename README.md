@@ -1,24 +1,80 @@
-# OUPOS 官方形象網站 — Apple 式捲動展示版
+# OUPOS 官方網站 — SEO / GEO 與平板動態展示優化版
 
-這是一個**可直接部署的靜態網站**。使用 `DESIGN-apple.md` 描述的產品展示排版語彙，但保留 OUPOS 原有的品牌色（`#8EAFCA`、`#7E9FBC`、`#FF8A45`）。網站並非 Apple 官方網站，也不使用 Apple 商標或未授權的網頁素材。
+網站包含官方產品首頁、六段 iPad POS 滾動展示、三種公開方案、常見問題、隱私權政策與服務條款。整體採原生 HTML / CSS / JS，可直接部署 Cloudflare Pages 或 Nginx，沒有前端建置程序與額外執行時依賴。
 
-## 網站內容
+## 網站結構
 
-- 大字產品首頁，完整 iPad POS 介面示意
-- 六個隨捲動變化的操作場景：選商品、加入購物車、調整配料、現金結帳、線上訂單、營運報表
-- 捲動時進場的功能區塊；提供「上一個 / 下一個」按鈕，尊重減少動態效果系統設定
-- 可實際點擊的示範 POS：點餐、付款、線上訂單、報表、掃碼、設定
-- 三個方案卡片與完整比較表：開源免費版、進階多工版、線上專業版（以這次上傳的首頁為準）
-- FAQ、App Store 和 GitHub 入口
-- 電腦、平板、手機適應式排版
+```
+OUPOS-website/
+├── index.html          # 官網、結構化資料、SEO metadata、FAQ
+├── styles.css          # 品牌樣式與響應式設計
+├── pos-demo.css        # iPad POS 示範介面
+├── app.js              # 六階段捲動展示與操作畫面
+├── legal.css           # 隱私與服務條款共用樣式
+├── privacy.html        # /privacy
+├── terms.html          # /terms
+├── robots.txt          # 爬蟲規則與 Sitemap 位置
+├── sitemap.xml         # 首頁、/privacy、/terms
+├── llms.txt            # AI 可閱讀的產品與價格摘要（非通用標準）
+├── assets/
+│   ├── favicon.svg
+│   └── og-oupos.png     # 1200×630 社群分享圖
+└── README.md
+```
 
-## 價格與服務聲明
+## 三種 OUPOS 版本（官網價格與功能）
 
-這次上傳的自訂首頁已將三種方案改為「開源免費版：NT$0」、「進階多工版：NT$299/月」、「線上專業版：NT$499/月」，本次保留這些修改。但同一頁仍含「尚未正式推出／價格未確認」等舊說明，`app.js` 中也保留規劃階段的對話提示；**是否正式提供付費方案，須由營運者自行確認**，在公開發行前請將首頁、FAQ、按鈕對話與正式服務契約的描述調整一致。本次未自行變更任何方案名稱、價格或功能。
+| 功能與費用 | 免費版 | Plus | Pro |
+|---|---:|---:|---:|
+| 價格 | NT$0 | NT$259／月 | NT$599／月 |
+| POS 結帳、庫存管理、員工帳號 | ✓ | ✓ | ✓ |
+| 離線營運 | ✓ | —（需連網） | —（需連網） |
+| 多機作業、多台出單機、手機報表 | — | ✓ | ✓ |
+| 會員系統、線上點餐、桌邊 QR Code 點餐 | — | — | ✓ |
+| 設備部署設定、操作教學、專屬客服 | — | ✓ | ✓ |
+| 金流模組與 Uber Eats 串接加購 | — | ✓ | ✓ |
 
-## 設定下載網址
+**加購模組（Plus／Pro 限定）**：全支付、LINE Pay 金流整合支援 POS 掃碼與線上付款，單個模組 NT$500（一次性），兩個合購 NT$800（一次性）。Uber Eats 串接模組 NT$99／月。第三方金流／外送平台自行收取的費用另計。
 
-開啟 `app.js`，修改頂部的：
+上述資料已同步到首頁、比較表、FAQ、`llms.txt`、`terms.html` 以及 `index.html` 的 JSON-LD。日後調整價格／功能時，記得同步修改這些位置。
+
+## 使用正式網址 `https://oupos.app/`
+
+網站目前使用下列正規網址：
+- 官網 `https://oupos.app/`
+- 隱私權政策 `https://oupos.app/privacy`
+- 服務條款 `https://oupos.app/terms`
+- Sitemap `https://oupos.app/sitemap.xml`
+- robots `https://oupos.app/robots.txt`
+- llms 資訊 `https://oupos.app/llms.txt`
+
+如果正式網址不是 `https://oupos.app`，請搜尋替換專案中**所有**該網址（尤其是 canonical、OG、JSON-LD、sitemap、robots、llms）。同時設定網站主機將 www、pages.dev 等替代網址 301 重新導向至正式 canonical 網域，避免重複收錄。**本檔案無法代替你在 Cloudflare 的網域 DNS / Redirect Rules 設定。**
+
+## SEO / GEO 實作
+
+- 首頁與兩個法律頁的唯一標題、描述、canonical、Open Graph 與分享圖。
+- 正確語言宣告 `zh-Hant`，首頁 `SoftwareApplication`、`WebSite`、`Organization`、`OfferCatalog` 和可見 FAQ 對應的 `FAQPage` JSON-LD；不虛構評論與評分。
+- 三種方案、費用、功能和答案寫在**原始 HTML 內**，不依賴 JavaScript 載入才能被讀到。
+- `robots.txt` 允許一般爬蟲，並提供 Sitemap URL。
+- `sitemap.xml` 採 sitemap.org 格式，收錄三個可索引的公開頁面。
+- `llms.txt` 供支援此格式的 AI 爬蟲參考；**它不是 Google 排名或 AI 引用保證**。
+
+部署成功後建議執行：
+1. 在瀏覽器確認上述每個 URL 都能正確開啟（不可回 404）。
+2. 以 Google Search Console 驗證 `oupos.app` 網域資產，提交 `https://oupos.app/sitemap.xml`。
+3. 使用 Google Rich Results Test / Schema Markup Validator 測試結構化資料，並用 URL Inspection 檢查可索引性。軟體應用程式富媒體搜尋結果可能要求真實評論／評分；本站未虛構評分。
+4. 用 Facebook 分享偵錯工具等確認 OG 圖片是否可供公開讀取。
+5. 定期更新內容、真正可用的下載連結，並保持網站資訊與實際方案一致。
+
+## 已修復「每一步，都看得見」白畫面
+
+六個場景於載入時一次建立 `#story-scene-0` 至 `#story-scene-5`。捲動時**只切換可見度，不再在切換動畫途中動態重建商品卡片、結帳頁或報表頁**。若 JavaScript 因網路中斷未載入，CSS 仍會保留第一個場景的空間背景；正常載入後會呈現全部六個畫面。
+
+現場交易功能**只由真正的 iPad POS App 處理**；官網展示所使用的資料與 POS 操作不會連線到你的正式付款或訂單 API。
+
+## 下載連結
+
+`app.js` 頂端的 `SITE_LINKS` 尚需填入你自己的真實網址：
 
 ```js
 const SITE_LINKS = {
@@ -27,91 +83,22 @@ const SITE_LINKS = {
 };
 ```
 
-只允許完整的 `https://` 網址。未填入時，按鈕會開啟「尚未設定」提示，不會跳到其他不明網站。
+如果尚未設定這兩個連結，首頁按鈕會顯示提示對話框，而不是導向錯誤位置。**正式營運網站應在上線前設定可用的取得、訂閱或客服入口。** Plus 與 Pro 按鈕目前連到首頁取得區，並未自行創造假的付款入口。
 
-## 本地開啟與部署
+## 隱私與法律文件
 
-網站包含：
+`privacy.html` 與 `terms.html` 是現有提供的文件內容；其中仍有要以你的真實資訊填寫／核實的項目，例如**營運者法定名稱、個資聯絡 Email、保存期限、第三方服務與實際付款／取消方式**。這些內容請勿直接留白公開營運。這次同步更新服務條款的版本價格、服務內容及加購模組費用，但不是法律合規審查。
 
-```
-index.html
-styles.css
-pos-demo.css
-app.js
-assets/favicon.svg
-```
+## 部署方式
 
-不需要 Node.js、不需要資料庫、不需要 CDN 或第三方 JavaScript。
+- **Cloudflare Pages**：解壓縮並上傳整個 `OUPOS-website/` 資料夾，網站入口檔為根目錄 `index.html`，Build command 留空。Cloudflare Pages 的 extensionless HTML 行為可提供 `/privacy`、`/terms`。
+- **Nginx**：把檔案放入站點的 `root` 目錄，並在 `location /` 設定 `try_files $uri $uri.html $uri/ =404;` 以支援乾淨網址。部署前用 `nginx -t` 驗證設定，營業中應慎選重新載入的時機。
 
-在網站資料夾執行：
+本地測試：
 
 ```sh
+cd OUPOS-website
 python3 -m http.server 8080
 ```
 
-然後在瀏覽器開啟 `http://localhost:8080`。部署至 Nginx 時，將以上檔案放入站點的 `root` 路徑即可。Cloudflare Pages 可直接上傳網站資料夾，build command 留空。
-
-## 自訂
-
-- **品牌色**：`styles.css` 頂端的 `--blue`、`--blue-strong`、`--orange`。
-- **捲動故事文案**：`app.js` 的 `storySteps` 陣列。
-- **故事內容和示範訂單**：`app.js` 的 `createDemo`、`setStoryScene`。
-- **方案與價格**：`index.html` 的 `#pricing` 區塊。
-- **下載連結**：`app.js` 的 `SITE_LINKS`。
-
-## 使用說明及限制
-
-1. 介面上的商品、收款、報表和接單均為模擬資料，不會觸發真實交易。
-2. 網站的 App Store 和 GitHub 連結尚未提供，必須由管理者填寫。
-3. 正式方案與價格不可直接從本展示頁認定為商業承諾。
-4. 滑動故事使用原生 JavaScript、requestAnimationFrame、IntersectionObserver 和 CSS；不載入外部分析或追蹤 SDK。
-5. 使用系統字體，Apple 裝置上會以系統 San Francisco 呈現，非 Apple 裝置則自動 fallback。
-
-
-## 新增：隱私權政策與服務條款
-
-本版本依據你上傳的 `index.html`、`styles.css`、`pos-demo.css`、`app(1).js` 修改，打包時將 `app(1).js` 更名為 `app.js`，以符合 HTML 原本的載入路徑。新增：
-
-- `privacy.html`：隱私權政策草案，涵蓋網站展示、POS 資料、第三方服務、資料保存與當事人權利。
-- `terms.html`：服務條款草案，涵蓋免費開源、網站示範、付費服務、使用責任及變更。
-- `legal.css`：兩個法律頁面的響應式排版。
-- 官網頁尾：新增「隱私權政策」「服務條款」連結。
-
-**發布前必要事項（不可忽略）**
-
-1. 在 `privacy.html`、`terms.html` 中搜尋所有 `【...】` 佔位欄位，填入營運者法定名稱、真實聯絡信箱、資料使用／保留期限、地區、第三方供應商、授權資訊等。
-2. 核實正式 POS App 是否登入、採集手機／會員資料、使用相機／網路、連接付款或通知平台、將資料儲存於本機、商家伺服器或雲端；政策需與實際資料流、App Store Connect 隱私揭露一致。
-3. 將兩頁頂部的「正式發布前請確認」提示在資訊補齊與法律審閱完成後，視需要改為正式發布用文案。這兩頁目前是**草案**，不能直接視為已核實的法律聲明。
-4. 你提供的首頁目前標示「NT$299/月」「NT$499/月」，但同頁的方案說明仍稱「尚未推出」；這些文字是**按你原檔保留**，正式上線前應確認是否已開放訂購及價格條款是否一致。
-5. 本次順便修復 `index.html` 中首頁 hero 多餘的關閉標籤，以及線上專業版功能列表過早結束的 `</ul>`，不更改你的商品文案、品牌色、捲動動畫或價格。
-
-上線後公開網址為：`https://你的網域/privacy` 與 `https://你的網域/terms`。Apple App Store Connect 的 Privacy Policy URL 可填入前者，但需先核對正式 App 資料使用方式。
-
-### 不顯示 `.html` 的網址設定
-
-網站檔案**仍保留** `privacy.html`、`terms.html`（HTML 是網站檔案格式），但頁面上的所有公開連結都使用 `/privacy` 與 `/terms`，網址列不需要帶副檔名。
-
-**Cloudflare Pages：** 可直接上傳整個網站資料夾，無須設定額外規則。Pages 會自動將 `privacy.html` 對應到 `/privacy`，並把帶 `.html` 的請求導向無副檔名網址。
-
-**Nginx：** 請確認網站 `server` 中的靜態檔案 `location /` 使用：
-
-```nginx
-location / {
-    try_files $uri $uri.html $uri/ =404;
-}
-```
-
-若希望使用者直接輸入 `/privacy.html` 或 `/terms.html` 時也自動改成簡潔網址，可以在相同的 `server` 區塊額外加上：
-
-```nginx
-location = /privacy.html { return 301 /privacy; }
-location = /terms.html { return 301 /terms; }
-```
-
-修改 Nginx 前請先備份設定，執行 `nginx -t` 確認通過後再 reload。若與現有的應用路由或反向代理設定衝突，應依既有架構整合，不能直接覆蓋整個 `server` 區塊。
-
-**本機檢查：** 若使用 `python3 -m http.server`，該簡易伺服器不具備副檔名省略功能；本機可先使用 `/privacy.html`、`/terms.html` 預覽，部署到支援簡潔網址的環境才以 `/privacy`、`/terms` 對外提供。
-
-參考法規與平台文件：
-- 台灣《個人資料保護法》第 8 條：https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=I0050021
-- Apple App privacy：https://developer.apple.com/help/app-store-connect/reference/app-information/app-privacy
+開啟 `http://localhost:8080`，注意 Python 內建靜態伺服器可能不自動將 `/privacy` 導向 `privacy.html`；需要在 Cloudflare Pages 或設定好路由的 Nginx 下測試乾淨網址。

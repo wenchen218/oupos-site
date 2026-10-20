@@ -1,0 +1,5 @@
+# OUPOS 官網搜尋引擎存取規則
+User-agent: *
+Allow: /
+
+Sitemap: https://oupos.app/sitemap.xml
