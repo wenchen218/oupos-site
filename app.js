@@ -271,7 +271,8 @@ const storyKicker=document.getElementById('story-kicker');
 const storyNumber=document.getElementById('story-number');
 const storyFill=document.getElementById('story-progress-fill');
 const storyBar=document.getElementById('story-progressbar');
-const storyImage=document.getElementById('story-image');
+const storyScreen=document.getElementById('story-screen');
+const storyFrames=[...document.querySelectorAll('.story-frame')];
 const tourImages=Array.from({length:6},(_,i)=>`assets/tour-${String(i+1).padStart(2,'0')}.webp`);
 const tourAlt=[
   'OUPOS POS 商品分類與商品網格',
@@ -281,8 +282,8 @@ const tourAlt=[
   'OUPOS POS 線上訂單管理',
   'OUPOS POS 營運報表與付款統計'
 ];
-// Lightweight images prevent mobile Safari from flattening multiple scaled POS layers.
-for(const src of tourImages){const preload=new Image();preload.src=src;}
+// All six optimized images are already mounted inside a fixed-ratio screen.
+// Scroll updates never change an image URL or its intrinsic dimensions.
 let activeScene=-1,scrollQueued=false;
 const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
 function changeScene(scene){
@@ -291,7 +292,8 @@ function changeScene(scene){
   activeScene=n;
   const info=storySteps[n];
   storyTrack?.setAttribute('data-scene',String(n));
-  if(storyImage){storyImage.src=tourImages[n];storyImage.alt=tourAlt[n];}
+  if(storyScreen)storyScreen.setAttribute('aria-label',tourAlt[n]);
+  storyFrames.forEach((frame,i)=>frame.classList.toggle('is-current',i===n));
   if(storyNumber)storyNumber.textContent=String(n+1).padStart(2,'0');
   if(storyKicker)storyKicker.textContent=info.kicker;
   if(storyTitle)storyTitle.innerHTML=info.title.replaceAll('\n','<br>');
@@ -312,12 +314,7 @@ function fitHero(){
   if(!slot||!view)return;
   view.style.transform=`scale(${slot.clientWidth/1040})`;
 }
-function fitStory(){
-  const slot=document.querySelector('.story-screen-slot');
-  if(!slot)return;
-  // Explicit height prevents iOS Safari from collapsing the frame to a thin black line.
-  slot.style.height=`${Math.round(slot.clientWidth*570/1040)}px`;
-}
+// The tablet height comes from CSS ratio padding, never JavaScript measurement.
 function getStoryDimensions(){
   if(!storyTrack)return {top:0,max:1};
   const top=window.scrollY+storyTrack.getBoundingClientRect().top;
@@ -351,13 +348,13 @@ function goToScene(n){
 document.getElementById('story-prev')?.addEventListener('click',()=>goToScene(activeScene-1));
 document.getElementById('story-next')?.addEventListener('click',()=>goToScene(activeScene+1));
 window.addEventListener('scroll',onScroll,{passive:true});
-window.addEventListener('resize',()=>{fitStory();fitHero();onScroll();},{passive:true});
+window.addEventListener('pageshow',onScroll,{passive:true});
+window.addEventListener('resize',()=>{fitHero();onScroll();},{passive:true});
 if('ResizeObserver' in window){
-  new ResizeObserver(fitStory).observe(document.querySelector('.story-screen-slot'));
   new ResizeObserver(fitHero).observe(document.querySelector('.hero-app-crop'));
 }
 // Prepare every operation screen once. No DOM changes inside the scrolling loop.
-fitStory();fitHero();onScroll();
+fitHero();onScroll();
 
 const SITE_DIALOG=document.getElementById('info-dialog');
 const dialogTitle=document.getElementById('info-dialog-title');

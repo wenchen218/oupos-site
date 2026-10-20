@@ -83,3 +83,47 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 @media(max-width:950px){.addon-grid{grid-template-columns:1fr;max-width:550px;gap:16px;}.addon-plan .plan-top>p{min-height:0;}.addon-bundle-bar{max-width:550px;}}
 @media(max-width:640px){.addons{margin-top:64px;}.addons-heading{margin-bottom:31px;}.addons-heading h3{font-size:38px;}.addons-heading>p:last-child{font-size:16px;}.addon-bundle-bar{padding:24px;flex-direction:column;align-items:flex-start;gap:19px;}.addon-bundle-price{text-align:left;}.addon-bundle-copy h4{font-size:22px;}}
 @media(max-width:360px){.addons-heading h3{font-size:33px;}.addon-plan .plan-price strong{font-size:27px;}}
+
+/* 2026-10-21 — Fixed-ratio product tour (Safari/iPhone stability).
+   Percentage padding defines the image height from the actual tablet content width;
+   this avoids WebKit's replaced-element 100%-height / intrinsic-size fallback. */
+.story-tablet{width:100%;max-width:920px;min-width:0;height:auto!important;aspect-ratio:auto!important;flex:0 1 auto;box-sizing:border-box;overflow:hidden}
+.story-screen-slot{position:relative!important;display:block!important;width:100%!important;height:0!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;padding:54.8076923077% 0 0!important;margin:0!important;overflow:hidden!important;isolation:isolate;background:#f2f2f4}
+.story-frame{position:absolute!important;top:0!important;left:0!important;right:0!important;bottom:0!important;display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;min-width:0!important;min-height:0!important;object-fit:fill!important;opacity:0;visibility:visible;z-index:1;transition:opacity 220ms ease;pointer-events:none;user-select:none;-webkit-user-drag:none;transform:none!important}
+.story-frame.is-current{opacity:1;z-index:2}
+@media(max-width:833px){
+  .story-sticky{height:calc(100svh - var(--subnav-height));min-height:0!important;max-height:none;top:var(--subnav-height);justify-content:center;overflow:hidden}
+  .story-inner{display:flex;flex-direction:column-reverse;align-items:center;justify-content:center;width:100%;min-width:0;max-width:750px;max-height:calc(100% - 42px);padding:16px 14px;gap:16px;margin:auto;overflow:visible}
+  .story-product{display:block;width:100%;max-width:610px;flex:0 1 auto;min-width:0;margin:0 auto}
+  .story-tablet{margin:0 auto;max-width:100%;transform:none!important;will-change:auto}
+  .story-copy{width:100%;min-width:0;min-height:0!important;flex:0 0 auto;margin:0;max-width:610px}
+  .story-background-word{display:none!important}
+  .story-bottom{bottom:10px}
+}
+@media(max-width:640px){
+  .story-track{height:600svh}
+  .story-inner{padding:12px 12px 24px;gap:18px;max-height:calc(100% - 24px)}
+  .story-copy{display:block;position:relative;padding:0 7px;min-height:0!important}
+  .story-copy h3{font-size:clamp(23px,7vw,31px);line-height:1.19;margin:0 0 6px;overflow-wrap:break-word}
+  .story-copy #story-description{font-size:13px;line-height:1.43;max-width:100%;margin:0}
+  .story-copy .story-kicker{font-size:14px;margin:10px 0 7px}
+  .story-controls{top:0;right:0;gap:8px}
+  .story-controls button{height:34px;width:34px}
+  .story-meter{margin-top:12px}
+  .story-tablet{border-width:6px;border-radius:16px}
+  .story-screen-slot{border-radius:9px}
+}
+@media(max-width:360px){
+  .story-inner{gap:11px;padding:7px 8px 18px}
+  .story-copy h3{font-size:23px}
+  .story-copy #story-description{font-size:12px}
+  .story-bottom{bottom:5px}
+}
+@media(max-height:620px) and (max-width:833px){
+  .story-inner{gap:8px;padding-block:5px 12px}
+  .story-copy h3{font-size:22px;margin-bottom:2px}
+  .story-copy #story-description{font-size:12px}
+  .story-copy .story-kicker{margin:5px 0 4px}
+  .story-meter{margin-top:7px}
+}
+@media(prefers-reduced-motion:reduce){.story-frame{transition:none}}

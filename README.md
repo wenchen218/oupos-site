@@ -113,3 +113,11 @@ python3 -m http.server 8080
 若未來更改 POS 介面，請同步更新這六張圖片，並維持 1040×570 長寬比。
 
 模組加購卡片直接沿用 `.plan-card` 結構，與免費、Plus、Pro 方案一致。
+
+
+## 2026-10-21 手機捲動平板修復
+
+- 六張 `assets/tour-01.webp`～`tour-06.webp` 現在固定放於橫向平板容器，透過 CSS 顯示／隱藏，不修改 `img.src`。
+- 使用經典百分比 padding（570 ÷ 1040 = 54.80769%）鎖定橫向畫面比例，避免 iPhone Safari 將圖片繪製成原始 1040px 寬、570px 高。
+- 手機版重新分配平板、文字與控制按鈕的高度；不再以 JavaScript 強制設定平板高度。
+- 首頁 CSS、JS、展示圖帶有 `?v=20261021b` 版本參數，以防舊快取造成 JavaScript 與 CSS 混用。部署 Cloudflare Pages 後建議清除快取並重新整理手機頁面。
