@@ -1,0 +1,57 @@
+/* OUPOS standalone pages, contact and navigation enhancements. Keep story tour CSS unchanged. */
+.product-nav-right .product-nav-link[aria-current="page"]{font-weight:700;color:#426a87}
+.product-nav-right{gap:23px}
+.page-hero{background:#f5f5f7;padding:85px 24px 86px}
+.page-hero-inner{max-width:1100px;margin:auto}
+.breadcrumb{display:flex;align-items:center;gap:12px;font-size:13px;color:#777982;margin-bottom:47px}
+.breadcrumb a:hover{text-decoration:underline;text-underline-offset:3px}
+.page-eyebrow{font-size:13px;letter-spacing:.12em;font-weight:700;color:#688daa;margin:0 0 21px}
+.page-hero h1{font-size:clamp(43px,6vw,83px);font-weight:650;line-height:1.085;letter-spacing:-1.5px;margin:0 0 27px}
+.page-hero h1 span{color:#7e9fbc}
+.page-hero-lead{font-size:clamp(17px,2vw,24px);line-height:1.5;color:#696a71;max-width:750px;margin:0}
+.page-hero-notes{display:flex;flex-wrap:wrap;gap:10px;margin-top:39px}
+.page-hero-notes span{font-size:13px;font-weight:600;border:1px solid #d5dce2;background:rgba(255,255,255,.76);padding:10px 16px;border-radius:50px;color:#456d88}
+/* Extend existing three-plan design to dedicated pricing */
+.page-hero + .pricing-section{padding-top:74px}
+.page-hero + .pricing-section .section-head{max-width:840px;margin-left:auto;margin-right:auto}
+.page-mini-cta{display:flex;justify-content:center;align-items:center;gap:19px;background:#f5f5f7;padding:0 24px 85px}
+.page-mini-cta p{margin:0;font-size:17px;color:#565b60}
+/* FAQ content builds on original home accordion */
+.faq-topic-links{margin-top:40px;display:flex;flex-wrap:wrap;gap:10px}
+.faq-topic-links a{border:1px solid #d5dce2;border-radius:50px;background:#fff;color:#4c7291;padding:10px 16px;font-size:14px;font-weight:600}
+.faq-topic-links a:hover{background:#e8f1f7}
+.faq-page-content{max-width:1020px;margin:0 auto;padding:48px 24px 105px}
+.faq-group{scroll-margin-top:96px;margin-top:52px}
+.faq-group-top{padding-bottom:22px}
+.faq-group-top .eyebrow{color:#7699b4;font-size:13px;margin:0 0 11px}
+.faq-group-top h2{font-size:clamp(27px,3.4vw,37px);line-height:1.2;margin:0}
+.faq-page-content .faq-list details p{padding-right:12px;line-height:1.72}
+.faq-pricing-cta{background:#eaf2f7;border-radius:22px;max-width:1060px;margin:0 auto 90px;padding:42px 52px;display:flex;gap:30px;align-items:center;justify-content:space-between}
+.faq-pricing-cta .eyebrow{color:#6386a2;margin-bottom:12px;font-size:13px}
+.faq-pricing-cta h2{font-size:clamp(28px,3.5vw,40px);margin:0 0 9px;line-height:1.2}
+.faq-pricing-cta p:last-child{font-size:16px;color:#5c626a;margin:0}
+/* Contact area */
+.contact-section{background:#fff;padding:94px 24px 108px}
+.contact-inner{max-width:1100px;margin:0 auto}
+.contact-intro{text-align:center;margin:0 auto 38px;max-width:780px}
+.contact-intro .eyebrow{font-size:13px;color:#7997af;letter-spacing:.08em;margin-bottom:12px}
+.contact-intro h2{font-size:clamp(33px,4vw,53px);line-height:1.15;letter-spacing:-.5px;margin:0 0 17px}
+.contact-intro>p:last-child{font-size:18px;line-height:1.6;color:#717178;margin:0}
+.contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.contact-card{min-width:0;display:flex;flex-direction:column;align-items:flex-start;min-height:247px;padding:30px 33px;border:1px solid #dedfe3;border-radius:20px;background:#f9fafb;transition:background .2s,transform .2s,border-color .2s}
+.contact-card:hover{transform:translateY(-3px);background:#f0f6fa;border-color:#b4cbdc}
+.contact-icon{width:43px;height:43px;border-radius:13px;background:#e6f0f7;color:#49728f;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:600;margin-bottom:22px}
+.contact-label{font-size:12px;font-weight:700;letter-spacing:.05em;color:#7b8993;margin-bottom:10px}
+.contact-card strong{font-size:clamp(21px,2.8vw,30px);font-weight:650;line-height:1.25;letter-spacing:-.4px;overflow-wrap:anywhere}
+.contact-id{font-size:16px;margin-top:5px;color:#6d7379}
+.contact-action{color:#4e7897;margin-top:auto;padding-top:23px;font-size:15px;font-weight:600}
+.footer-contact{display:flex;align-items:center;flex-wrap:wrap;column-gap:25px;row-gap:12px;padding:23px 0 5px;font-size:13px}
+.footer-contact>span{color:#7b7e84;font-weight:600}
+.footer-contact a{color:#456e8e;overflow-wrap:anywhere}
+.footer-contact a:hover{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:750px){.faq-pricing-cta{margin-inline:20px;flex-direction:column;align-items:flex-start;padding:32px 30px}}
+@media(max-width:640px){.product-nav-right{gap:14px}.product-nav-link.product-nav-quick{display:inline;font-size:13px}.page-hero{padding:51px 20px 58px}.breadcrumb{margin-bottom:34px}.page-hero h1{font-size:clamp(36px,8.5vw,52px);letter-spacing:-.7px}.page-hero-lead br{display:none}.page-hero-notes{gap:8px}.page-hero-notes span{font-size:12px;padding:7px 11px}.page-hero + .pricing-section{padding-top:58px}.faq-page-content{padding:24px 20px 60px}.faq-group{margin-top:40px}.faq-group-top{padding-bottom:14px}.faq-pricing-cta{margin-bottom:60px}.page-mini-cta{flex-direction:column;padding-bottom:58px;text-align:center}.contact-section{padding:69px 18px 74px}.contact-intro>p:last-child{font-size:16px}.contact-grid{grid-template-columns:1fr;gap:14px}.contact-card{min-height:221px;padding:25px}.contact-card strong{font-size:24px}.footer-contact{align-items:flex-start;flex-direction:column;gap:9px;padding-bottom:19px}}
+@media(max-width:350px){.product-nav-inner{padding-inline:13px}.product-nav-right{gap:10px}.product-nav-link.product-nav-quick{font-size:12px}.product-nav-name{font-size:18px}.page-hero h1{font-size:35px}.contact-card strong{font-size:21px}}
+@media(prefers-reduced-motion:reduce){.contact-card{transition:none}}
+
+.faq-more-link{text-align:center;margin:34px 0 0}.faq-more-link .text-link{font-weight:600}

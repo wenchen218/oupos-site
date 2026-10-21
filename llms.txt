@@ -4,13 +4,15 @@
 
 ## 官方資訊
 - 官方網站：https://oupos.app/
-- 三種方案與價格：https://oupos.app/#pricing
-- 加購模組：https://oupos.app/#addons
+- 獨立報價方案頁：https://oupos.app/pricing
+- 加購模組：https://oupos.app/pricing#addons
 - 操作展示：https://oupos.app/#cinema
 - 功能：https://oupos.app/#features
-- 常見問題：https://oupos.app/#faq
+- 常見問題 FAQ：https://oupos.app/faq
 - 隱私權政策：https://oupos.app/privacy
 - 服務條款：https://oupos.app/terms
+- 客服 Email：support@oupos.app
+- LINE 官方帳號：@183fjvbn（https://line.me/R/ti/p/%40183fjvbn）
 
 ## OUPOS 版本與價格（TWD）
 - 免費版：NT$0。提供 POS 點餐與結帳、商品庫存管理、員工帳號、離線使用。可在沒有網際網路的情況下營運。
