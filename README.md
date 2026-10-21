@@ -8,7 +8,10 @@
 OUPOS-website/
 ├── index.html          # 官網、結構化資料、SEO metadata、FAQ
 ├── styles.css          # 品牌樣式與響應式設計
-├── pages.css           # FAQ、報價和聯絡區專屬樣式
+├── pages.css           # 原有 FAQ、報價和聯絡區樣式
+├── apple-ui.css        # 根據 DESIGN-apple.md 重製的全站 Apple 版型覆蓋層，保留 OUPOS 品牌色
+├── DESIGN-apple.md     # 本次 UI 重製的原始設計參考
+├── DESIGN-OUPOS.md     # Apple 設計規範 × OUPOS 品牌色之對應說明
 ├── pricing.html        # /pricing 獨立報價方案頁
 ├── faq.html            # /faq 獨立常見問題頁
 ├── pos-demo.css        # iPad POS 示範介面
@@ -75,7 +78,7 @@ OUPOS-website/
 
 ## 已修復「每一步，都看得見」白畫面
 
-改成六張預先匯出的 OUPOS POS 操作畫面 WebP，捲動時只更新**單一圖片元素**，不再同時維護六個巨大 DOM 畫面，也不重建結帳或報表元件。`fitStory()` 為 iPhone Safari 明確設定螢幕區高度（寬度 × 570/1040），防止平板內容坍縮成一條黑色邊框。即使 JavaScript 未載入也會顯示第 01 張展示圖片；正常載入後會依序呈現全部六個畫面。
+改成六張預先匯出的 OUPOS POS 操作畫面 WebP，固定堆疊在同一個 `#story-screen` 容器內；JavaScript 只切換 `.is-current`，不重建結帳或報表介面，也不在捲動時修改圖片來源。CSS 使用 `aspect-ratio: 1040/570` 保持 iPhone Safari 的橫向畫面比例。即使 JavaScript 未載入也會顯示第 01 張展示圖片；正常載入後會依序呈現六段。
 
 現場交易功能**只由真正的 iPad POS App 處理**；官網展示所使用的資料與 POS 操作不會連線到你的正式付款或訂單 API。
 
@@ -90,7 +93,7 @@ const SITE_LINKS = {
 };
 ```
 
-如果尚未設定這兩個連結，首頁按鈕會顯示提示對話框，而不是導向錯誤位置。**正式營運網站應在上線前設定可用的取得、訂閱或客服入口。** Plus 與 Pro 按鈕目前連到首頁取得區，並未自行創造假的付款入口。
+如果尚未設定這兩個連結，首頁按鈕會顯示提示對話框，而不是導向錯誤位置。**正式營運網站應在上線前設定可用的取得、訂閱或客服入口。** 報價獨立頁的 Plus 與 Pro 按鈕連到該頁客服區，沒有自行創造假的付款入口。
 
 ## 隱私與法律文件
 
@@ -114,8 +117,8 @@ python3 -m http.server 8080
 ## 捲動展示（iPhone Safari 相容版）
 
 `assets/tour-01.webp` 至 `tour-06.webp` 為由 OUPOS POS 示範 UI 直接產生的展示圖片。
-網站會依六段捲動位置切換同一個 `#story-image` 的圖片；`fitStory()` 額外設定
-畫面高度，以避免某些 iOS Safari 版本將平板內容壓扁。
+網站會依六段捲動位置在 `#story-screen` 中切換六張 `.story-frame` 圖片的可見性；
+使用 `aspect-ratio: 1040/570` 保持螢幕比例，以避免某些 iOS Safari 版本將平板內容壓扁。
 若未來更改 POS 介面，請同步更新這六張圖片，並維持 1040×570 長寬比。
 
 模組加購卡片直接沿用 `.plan-card` 結構，與免費、Plus、Pro 方案一致。
@@ -124,9 +127,9 @@ python3 -m http.server 8080
 ## 2026-10-21 手機捲動平板修復
 
 - 六張 `assets/tour-01.webp`～`tour-06.webp` 現在固定放於橫向平板容器，透過 CSS 顯示／隱藏，不修改 `img.src`。
-- 使用經典百分比 padding（570 ÷ 1040 = 54.80769%）鎖定橫向畫面比例，避免 iPhone Safari 將圖片繪製成原始 1040px 寬、570px 高。
+- 使用 CSS `aspect-ratio: 1040/570` 鎖定橫向畫面比例，避免 iPhone Safari 將圖片繪製成錯誤尺寸。
 - 手機版重新分配平板、文字與控制按鈕的高度；不再以 JavaScript 強制設定平板高度。
-- 首頁 CSS、JS、展示圖帶有 `?v=20261021b` 版本參數，以防舊快取造成 JavaScript 與 CSS 混用。部署 Cloudflare Pages 後建議清除快取並重新整理手機頁面。
+- 首頁 CSS、JS、展示圖帶有 `?v=20261021c` 版本參數，以防舊快取造成 JavaScript 與 CSS 混用。部署 Cloudflare Pages 後建議清除快取並重新整理手機頁面。
 
 
 ## 2026-10-21 獨立報價／FAQ 與官方聯絡管道
@@ -137,3 +140,23 @@ python3 -m http.server 8080
 - LINE 官方帳號連結採 LINE Developers 官方的好友頁 URL 格式 `https://line.me/R/ti/p/%40183fjvbn`。請上線前以實際 LINE App 確認所提供 ID 是否正確。
 - 隱私條款仍包含若干必須由營運者核實的法定名稱、資料保存時間與外部服務細節占位項。僅替換已收到的真實聯絡信箱，沒有捏造營運者姓名。
 - 本更新**不影響原本的六階段 iPhone POS 操作展示程式**。
+
+
+## Apple 設計重製（保留 OUPOS 主題色）
+
+本次依 `DESIGN-apple.md` 重製全站 UI，主要設計措施：
+
+- 恢復 44px 黑色全站導覽 + 52px 霧面產品次導覽，行動裝置使用可展開選單。
+- 標題改用 SF Pro Display／系統字體、大字距與大留白，避免大量裝飾標籤及陰影。
+- FAQ 獨立頁：白色產品介紹首屏、淺灰背景的 15 題分組展開、深色產品展示、白色聯絡區。
+- 報價獨立頁：大標題與真實 POS 展示、免費／Plus／Pro 三方案、功能比較、模組加購、深色收尾及聯絡資訊。
+- 保留 **OUPOS 原品牌主題藍 `#8EAFCA`、重點藍 `#7E9FBC`、品牌橘 `#FF8A45`**。深藍 `#405C74` 用於小型文字連結，改善白底上的對比。Apple 規範中 `#0066CC` 不取代 OUPOS 品牌。
+- `apple-ui.css` 在各頁原有 CSS 之後載入。未變動 `app.js` 的操作邏輯及六張 POS 展示圖。
+- 已在 Chromium 桌機及手機模擬 viewport 測試首頁、FAQ、報價、隱私與服務條款；**仍建議在 iPhone Safari 上實際驗證**。
+
+本次改動屬於原始碼與視覺實作更新，沒有直接部署到你的 Cloudflare Pages。
+
+
+## Google OAuth 隱私權政策補強（2026-10-21）
+
+`privacy.html` 已分別載明 Google 基本登入資料類別、用途、儲存與權杖處理、第三方分享、保存原則、撤銷授權及刪除流程，並維持 Apple 風格與品牌色。**部署及重新申請驗證前，請先核對 `GOOGLE-OAUTH-發布前核對清單.md`，尤其是實際 Google OAuth scopes、認證服務商與保存/刪除流程；這些資訊尚未由已提供的原始碼確認。**

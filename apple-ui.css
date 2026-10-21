@@ -1,0 +1,155 @@
+/* OUPOS × DESIGN-apple.md — 2026-10-21
+   Apple-inspired type, navigation, spacing, surfaces and photographic product rhythm.
+   IMPORTANT: OUPOS retains its own brand palette (#8EAFCA, #7E9FBC, #FF8A45).
+   No Google/Apple proprietary fonts are bundled or distributed. */
+:root{--ou-blue:#8eafca;--ou-blue-strong:#7e9fbc;--ou-orange:#ff8a45;--ou-deep:#405c74;--ou-ink:#1d1d1f;--ou-grey:#6e6e73;--ou-paper:#f5f5f7;--ou-hair:#d2d2d7;--ou-dark:#272729;--ou-content:1120px;--subnav-height:52px}
+body.apple-redesign{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','PingFang TC','Noto Sans TC',system-ui,sans-serif;color:var(--ou-ink);background:#fff;-webkit-font-smoothing:antialiased;letter-spacing:-.24px}
+.apple-redesign h1,.apple-redesign h2,.apple-redesign h3,.apple-redesign h4{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang TC',system-ui,sans-serif;font-weight:600;letter-spacing:-.04em}
+.apple-redesign a:focus-visible,.apple-redesign button:focus-visible,.apple-redesign summary:focus-visible{outline:2px solid var(--ou-deep);outline-offset:4px}
+.apple-redesign .pill{border:1px solid var(--ou-blue-strong);background:var(--ou-blue);color:#142b3a;font-weight:600;box-shadow:none}
+.apple-redesign .pill:hover{background:var(--ou-blue-strong);border-color:var(--ou-blue-strong);color:#142b3a}
+.apple-redesign .pill-outline{background:transparent;color:var(--ou-deep);border-color:var(--ou-blue-strong)}
+.apple-redesign .pill-outline:hover{background:#edf3f8}
+.apple-redesign .text-link{color:var(--ou-deep)}
+.apple-redesign .text-link.on-dark{color:#b4d7ee}
+/* Apple-design two-row shell. The black utility row scrolls naturally; the subnav sticks. */
+.global-nav{height:44px;background:#000;color:#f5f5f7;position:relative;z-index:100}
+.global-nav-inner{height:44px;display:flex;align-items:center;justify-content:space-between;max-width:1000px;margin:auto;padding:0 24px;gap:24px}
+.global-mark{font-size:15px;font-weight:650;letter-spacing:.045em;line-height:1;color:#fff;white-space:nowrap}
+.global-mark:hover{color:#d6e7f3}
+.global-nav-links{display:flex;justify-content:space-between;align-items:center;gap:clamp(16px,3vw,42px);height:100%}
+.global-nav-links a{font-size:12px;font-weight:400;color:#d3d3d7;white-space:nowrap;transition:color .2s}
+.global-nav-links a:hover{color:white}
+.global-mobile{display:none}
+.apple-redesign .product-nav{position:sticky;top:0;height:52px;background:rgba(250,250,252,.86);border-bottom:1px solid rgba(0,0,0,.10);backdrop-filter:blur(18px) saturate(180%);-webkit-backdrop-filter:blur(18px) saturate(180%);z-index:75}
+.apple-redesign .product-nav-inner{max-width:1000px;padding:0 24px}
+.apple-redesign .product-nav-name{font-size:21px;font-weight:600;letter-spacing:-.5px}
+.apple-redesign .product-nav-right{gap:25px}
+.apple-redesign .product-nav-link{font-size:12px;color:#55555a;font-weight:400}
+.apple-redesign .product-nav-link[aria-current=page]{color:var(--ou-ink);font-weight:600}
+.apple-redesign .product-nav-link:hover{color:var(--ou-deep)}
+.apple-redesign .pill-small{min-height:30px;padding:5px 13px;font-size:12px;font-weight:600}
+/* Product-presentation home: preserve real SwiftUI-derived POS canvases and brand accents */
+.apple-redesign .hero{background:var(--ou-paper);padding-top:90px}
+.apple-redesign .hero h1{font-weight:600;line-height:1.075}
+.apple-redesign .hero h1 span{color:#729bb9}
+.apple-redesign .intro-band{background:#fff}
+.apple-redesign .feature-focus{background:#272729}
+.apple-redesign .feature-card{border-radius:0;border:none;background:#343437;box-shadow:none}
+.apple-redesign .feature-icon{background:transparent;border:1px solid #637e94;border-radius:11px;color:#c2ddeb}
+.apple-redesign .feature-no{color:#bad4e6}
+.apple-redesign .story-background-word{color:rgba(142,175,202,.07)}
+.apple-redesign .story-controls button{color:var(--ou-deep)}
+.apple-redesign .story-screen-slot{width:100%;height:auto;aspect-ratio:1040/570;position:relative;overflow:hidden;isolation:isolate}
+.apple-redesign .story-frame{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:fill;opacity:0;visibility:hidden;transition:opacity .32s ease;pointer-events:none}
+.apple-redesign .story-frame.is-current{opacity:1;visibility:visible}
+.apple-redesign .story-tablet{aspect-ratio:auto;transform:none!important}
+/* Single quiet brand-led action grammar. Prefer boundaries to decorative shadows. */
+.apple-redesign .pricing-section,.apple-redesign .apple-plans{background:var(--ou-paper)}
+.apple-redesign .plan-card{border:1px solid #dedee3;border-radius:18px;background:#fff;box-shadow:none;padding:34px 30px 28px}
+.apple-redesign .plan-featured{border:2px solid var(--ou-blue-strong);padding:33px 29px 27px}
+.apple-redesign .plan-kicker{color:var(--ou-deep);font-size:12px;font-weight:600;letter-spacing:.06em}
+.apple-redesign .plan-kicker em{border-radius:6px;background:#f2f7fa;border-color:#d4e3ed;color:var(--ou-deep)}
+.apple-redesign .plan-card h3{font-size:30px;line-height:1.15;margin-top:19px}
+.apple-redesign .plan-top>p{color:#68686e}
+.apple-redesign .plan-price strong{font-size:32px;font-weight:600;letter-spacing:-.035em}
+.apple-redesign .plan-card li:before{color:#537e9c}
+.apple-redesign .plan-card .plan-cta{margin-top:auto}
+.apple-redesign .comparison{background:#fff;border-radius:18px;box-shadow:none}
+.apple-redesign .comparison-table td:nth-child(2){color:var(--ou-deep)}
+.apple-redesign .addon-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.apple-redesign .addon-bundle-bar{border:1px solid #c6dbe9;border-radius:18px;background:#e9f2f8}
+.apple-redesign .addon-bundle-copy h4{font-weight:600}
+.apple-redesign .faq-list details{border-color:#d2d2d7}
+.apple-redesign .opensource-section{background:#272729}
+.apple-redesign .download-section{background:#f5f5f7}
+/* White space, SF display hierarchy and restrained contrasting dark tile on standalone pages */
+.apple-content{width:min(calc(100% - 48px),var(--ou-content));margin-inline:auto}
+.apple-hero{background:#f5f5f7;text-align:center;overflow:hidden}
+.apple-hero-center{padding-top:clamp(94px,10vw,147px)}
+.apple-eyebrow{font-size:12px;font-weight:600;line-height:1.5;letter-spacing:.12em;color:var(--ou-deep);margin:0 0 25px}
+.apple-hero h1{font-size:clamp(44px,6.6vw,88px);letter-spacing:-.055em;line-height:1.06;font-weight:600;margin:0 auto 27px;max-width:1000px}
+.apple-hero-lead{font-size:clamp(19px,2.1vw,25px);font-weight:400;letter-spacing:-.025em;line-height:1.42;color:#6e6e73;margin:0 auto 22px;max-width:770px}
+.apple-inline-link{display:inline-flex;align-items:center;gap:8px;color:var(--ou-deep);font-size:17px;font-weight:500;line-height:1.5}
+.apple-inline-link:hover{text-decoration:underline;text-underline-offset:5px}
+.apple-inline-link span{font-size:25px;font-weight:400;line-height:1}
+.apple-hero-device{width:min(100%,970px);margin:75px auto -5px}
+.apple-device{border:10px solid #151515;background:#151515;border-radius:23px;overflow:hidden;box-shadow:rgba(0,0,0,.20) 3px 5px 30px;line-height:0}
+.apple-device img{display:block;width:100%;height:auto;aspect-ratio:1040/570;object-fit:fill}
+.apple-hero-pricing{background:#f5f5f7}
+.apple-hero-pricing .apple-hero-center{padding-top:105px}
+.apple-hero-faq{background:#fff;min-height:565px}
+.apple-hero-faq .apple-hero-center{padding-top:128px;padding-bottom:112px}
+.apple-plans,.apple-comparison,.apple-addon-section{padding:110px 0}
+.apple-plans .pricing-grid{margin-bottom:0}
+.apple-section-heading{text-align:center;max-width:825px;margin:0 auto 56px}
+.apple-section-heading h2{font-size:clamp(38px,4.5vw,64px);line-height:1.11;letter-spacing:-.045em;margin:0 0 20px}
+.apple-section-heading>p:last-child{font-size:20px;color:#6e6e73;line-height:1.45;margin:0 auto}
+.apple-comparison{background:#fff}
+.apple-comparison .comparison{padding:0;border-radius:0;max-width:var(--ou-content)}
+.apple-comparison .comparison-head{display:none}
+.apple-comparison .comparison-table{font-size:15px}
+.apple-comparison .comparison-table thead th{background:#f5f5f7}
+.apple-comparison .comparison-table th,.apple-comparison .comparison-table td{padding-block:20px}
+.apple-addon-section{background:#f5f5f7}
+.apple-addon-section .addons{margin:0 auto}
+.apple-addon-section .addons-heading{display:none}
+.apple-addon-section .addon-plan .plan-top>p{min-height:66px}
+.apple-addon-section .addon-bottom-note{margin-top:26px}
+/* Full-bleed dark statement rather than nested CTA cards */
+.apple-dark-cta{background:#272729;color:#fff;text-align:center;padding:127px 0 131px}
+.apple-dark-cta h2{font-size:clamp(43px,5vw,72px);line-height:1.09;letter-spacing:-.045em;margin:0 0 25px}
+.apple-dark-cta p:not(.apple-eyebrow){font-size:20px;line-height:1.5;color:#d2d2d7;max-width:720px;margin:0 auto 24px}
+.apple-dark-cta .apple-eyebrow{color:#a7cce5}
+.apple-dark-cta .apple-actions{display:flex;gap:32px;align-items:center;justify-content:center;flex-wrap:wrap}
+.apple-dark-cta .apple-inline-link{color:#b8d9ef}
+/* FAQ: editorial rows and hairline dividers, not colored pills or cards */
+.apple-faq-body{background:#f5f5f7;padding:44px 0 116px}
+.apple-faq-group{display:grid;grid-template-columns:minmax(210px,.82fr) minmax(0,1.9fr);gap:75px;padding:72px 0 73px;border-bottom:1px solid #d2d2d7;scroll-margin-top:82px}
+.apple-faq-group:last-child{border-bottom:0}
+.apple-faq-group-title h2{font-size:clamp(27px,3vw,40px);line-height:1.17;margin:0}
+.apple-faq-group .apple-eyebrow{color:#718a9f;margin-bottom:15px}
+.apple-faq-items{min-width:0}
+.apple-faq-items details{border-bottom:1px solid #d2d2d7}
+.apple-faq-items details:first-child{border-top:1px solid #d2d2d7}
+.apple-faq-items summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:25px;min-height:82px;padding:17px 5px 17px 0;font-size:19px;line-height:1.34;font-weight:600;letter-spacing:-.035em}
+.apple-faq-items summary::-webkit-details-marker{display:none}
+.apple-faq-icon{height:24px;width:24px;flex:none;position:relative}
+.apple-faq-icon:before,.apple-faq-icon:after{content:'';position:absolute;top:11px;left:4px;width:16px;height:2px;border-radius:2px;background:#678eaa;transition:transform .22s}
+.apple-faq-icon:after{transform:rotate(90deg)}
+.apple-faq-items details[open] .apple-faq-icon:after{transform:rotate(0)}
+.apple-faq-answer{color:#6e6e73;font-size:16px;line-height:1.75;max-width:680px;padding:0 25px 24px 0}
+.apple-faq-answer p{margin:0}
+.apple-feature-banner{padding:114px 0 0;overflow:hidden}
+.apple-feature-banner-dark{background:#272729;color:#fff}
+.apple-feature-banner .apple-content{display:grid;grid-template-columns:1fr 1.14fr;align-items:center;gap:7%}
+.apple-feature-text{padding:0 0 110px}
+.apple-feature-text h2{font-size:clamp(39px,4.5vw,64px);line-height:1.1;letter-spacing:-.045em;margin:0 0 21px}
+.apple-feature-text>p:not(.apple-eyebrow){font-size:19px;line-height:1.5;color:#d2d2d7;max-width:520px}
+.apple-feature-banner .apple-eyebrow{color:#b5d9ed}
+.apple-feature-banner .apple-inline-link{color:#b7d9ed}
+.apple-feature-product{align-self:end}
+.apple-feature-product .apple-device{transform:translateY(15px);border-bottom-left-radius:0;border-bottom-right-radius:0}
+/* Contact: clear two-row editorial links without heavy backgrounds/shadows. */
+.apple-contact{background:#fff;text-align:center;padding:110px 0 124px}
+.apple-contact h2{font-size:clamp(40px,5vw,67px);line-height:1.09;letter-spacing:-.045em;margin:0 auto 24px}
+.apple-contact-lead{color:#6e6e73;font-size:20px;line-height:1.5;max-width:740px;margin:0 auto 59px}
+.apple-contact-methods{width:min(100%,820px);margin:auto;text-align:left;border-top:1px solid #d2d2d7}
+.apple-contact-method{display:grid;grid-template-columns:minmax(125px,1fr) minmax(0,2.3fr) auto;gap:16px;align-items:center;padding:28px 0;border-bottom:1px solid #d2d2d7;color:var(--ou-ink);transition:color .2s}
+.apple-contact-method:hover{color:var(--ou-deep)}
+.apple-contact-label{color:#6e6e73;font-size:15px}
+.apple-contact-method strong{font-size:clamp(18px,2.25vw,27px);font-weight:600;letter-spacing:-.04em;overflow-wrap:anywhere}
+.apple-arrow{font-size:21px;color:var(--ou-deep)}
+.apple-redesign .site-footer{background:#f5f5f7;padding:68px 24px 32px}
+.apple-redesign .footer-inner{max-width:1000px}
+.apple-redesign .footer-logo{color:var(--ou-deep);font-weight:650}
+.apple-redesign .footer-contact{border-bottom:1px solid #d2d2d7;padding:25px 0}
+.apple-redesign .footer-contact a{color:var(--ou-deep)}
+.apple-redesign .footer-bottom{padding-top:23px}
+.apple-redesign .footer-nav a{font-size:12px}
+/* Keep legal text readable under the new common shell */
+.apple-redesign .legal-page h1{letter-spacing:-.035em}
+@media(max-width:970px){.apple-faq-group{gap:36px;grid-template-columns:minmax(170px,.7fr) 1.6fr}.apple-feature-banner .apple-content{gap:4%}.apple-redesign .addon-grid{grid-template-columns:1fr;max-width:540px}.apple-redesign .addon-plan .plan-top>p{min-height:0}}
+@media(max-width:720px){.global-nav-inner{padding:0 17px}.global-nav-links{display:none}.global-mobile{display:block;position:relative;margin-left:auto}.global-mobile summary{list-style:none;display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;align-items:center;cursor:pointer}.global-mobile summary::-webkit-details-marker{display:none}.global-mobile summary span{height:1.5px;width:19px;background:#fff;border-radius:2px}.global-mobile[open] summary span:first-child{transform:translateY(3.3px) rotate(45deg)}.global-mobile[open] summary span:last-child{transform:translateY(-3.3px) rotate(-45deg)}.global-mobile nav{position:absolute;top:44px;right:-17px;width:min(320px,95vw);background:rgba(27,27,29,.98);padding:18px 26px;display:flex;flex-direction:column;gap:0;box-shadow:0 16px 24px rgba(0,0,0,.16)}.global-mobile nav a{display:block;padding:14px 0;border-bottom:1px solid #424246;color:#f5f5f7;font-size:15px}.global-mobile nav a:last-child{border:0}.apple-redesign .product-nav-right .product-nav-link{display:none}.apple-content{width:calc(100% - 40px)}.apple-hero-center{padding-top:81px}.apple-hero h1{font-size:clamp(39px,9.2vw,58px)}.apple-hero-lead{font-size:18px}.apple-hero-lead br{display:none}.apple-hero-device{width:calc(100% + 18px);margin:54px auto 0;transform:translateX(-9px)}.apple-device{border-width:6px;border-radius:15px}.apple-hero-faq{min-height:0}.apple-hero-faq .apple-hero-center{padding:82px 0 87px}.apple-plans,.apple-comparison,.apple-addon-section{padding:75px 0}.apple-section-heading{margin-bottom:39px}.apple-section-heading h2{font-size:clamp(35px,8vw,47px)}.apple-section-heading>p:last-child{font-size:17px}.apple-redesign .plan-card{padding:29px 25px 26px}.apple-redesign .plan-featured{padding:28px 24px 25px}.apple-redesign .pricing-grid{gap:15px}.apple-redesign .comparison{padding:0;overflow:visible}.apple-redesign .comparison-table{min-width:660px}.apple-faq-body{padding:8px 0 70px}.apple-faq-group{display:block;padding:56px 0 42px}.apple-faq-group-title{margin-bottom:26px}.apple-faq-group-title h2{font-size:31px}.apple-faq-items summary{min-height:76px;font-size:17px}.apple-faq-answer{font-size:15px}.apple-feature-banner{padding:86px 0 0}.apple-feature-banner .apple-content{display:block}.apple-feature-text{padding:0 0 47px}.apple-feature-text h2{font-size:43px}.apple-feature-product .apple-device{margin:0 -10px}.apple-dark-cta{padding:91px 0 96px}.apple-dark-cta h2{font-size:42px}.apple-dark-cta p:not(.apple-eyebrow){font-size:17px}.apple-contact{padding:79px 0 84px}.apple-contact h2{font-size:43px}.apple-contact-lead{font-size:17px;margin-bottom:36px}.apple-contact-method{grid-template-columns:1fr auto;gap:8px;padding:22px 0}.apple-contact-label{grid-column:1/2;grid-row:1/2}.apple-contact-method strong{grid-column:1/2;grid-row:2/3;font-size:22px}.apple-arrow{grid-column:2/3;grid-row:1/3}.apple-redesign .site-footer{padding-top:50px}.apple-redesign .footer-nav{column-gap:21px}.apple-redesign .hero{padding-top:53px}.apple-redesign .feature-card{min-height:215px}}
+@media(max-width:420px){.apple-content{width:calc(100% - 32px)}.apple-hero h1{font-size:38px}.apple-hero-faq .apple-hero-center{padding-top:71px}.apple-feature-text h2{font-size:37px}.apple-redesign .plan-price strong{font-size:30px}.apple-redesign .story-copy h3{font-size:27px}.apple-redesign .hero h1{font-size:33px}}
+@media(prefers-reduced-motion:reduce){.apple-redesign *{scroll-behavior:auto!important;transition-duration:0s!important;animation-duration:0s!important}.apple-redesign .motion-ready .reveal{opacity:1;transform:none}}
