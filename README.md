@@ -1,90 +1,24 @@
-# OUPOS 官方網站 — SEO / GEO 與平板動態展示優化版
+# OUPOS 官方形象網站 — Apple 式捲動展示版
 
-網站包含官方產品首頁、六段 iPad POS 滾動展示、三種公開方案、獨立報價與 FAQ 頁面、官方聯絡方式、隱私權政策與服務條款。整體採原生 HTML / CSS / JS，可直接部署 Cloudflare Pages 或 Nginx，沒有前端建置程序與額外執行時依賴。
+這是一個**可直接部署的靜態網站**。使用 `DESIGN-apple.md` 描述的產品展示排版語彙，但保留 OUPOS 原有的品牌色（`#8EAFCA`、`#7E9FBC`、`#FF8A45`）。網站並非 Apple 官方網站，也不使用 Apple 商標或未授權的網頁素材。
 
-## 網站結構
+## 網站內容
 
-```
-OUPOS-website/
-├── index.html          # 官網、結構化資料、SEO metadata、FAQ
-├── styles.css          # 品牌樣式與響應式設計
-├── pages.css           # 原有 FAQ、報價和聯絡區樣式
-├── apple-ui.css        # 根據 DESIGN-apple.md 重製的全站 Apple 版型覆蓋層，保留 OUPOS 品牌色
-├── DESIGN-apple.md     # 本次 UI 重製的原始設計參考
-├── DESIGN-OUPOS.md     # Apple 設計規範 × OUPOS 品牌色之對應說明
-├── pricing.html        # /pricing 獨立報價方案頁
-├── faq.html            # /faq 獨立常見問題頁
-├── pos-demo.css        # iPad POS 示範介面
-├── app.js              # 六階段捲動展示與操作畫面
-├── legal.css           # 隱私與服務條款共用樣式
-├── privacy.html        # /privacy
-├── terms.html          # /terms
-├── robots.txt          # 爬蟲規則與 Sitemap 位置
-├── sitemap.xml         # 5 個公開頁：首頁、/pricing、/faq、/privacy、/terms
-├── llms.txt            # AI 可閱讀的產品與價格摘要（非通用標準）
-├── assets/
-│   ├── favicon.svg
-│   ├── og-oupos.png     # 1200×630 社群分享圖
-│   └── tour-01.webp ～ tour-06.webp  # 六段實際 POS 展示畫面
-└── README.md
-```
+- 大字產品首頁，完整 iPad POS 介面示意
+- 六個隨捲動變化的操作場景：選商品、加入購物車、調整配料、現金結帳、線上訂單、營運報表
+- 捲動時進場的功能區塊；提供「上一個 / 下一個」按鈕，尊重減少動態效果系統設定
+- 可實際點擊的示範 POS：點餐、付款、線上訂單、報表、掃碼、設定
+- 三個方案卡片與完整比較表：開源免費版、進階多工版、線上專業版（以這次上傳的首頁為準）
+- FAQ、App Store 和 GitHub 入口
+- 電腦、平板、手機適應式排版
 
-## 三種 OUPOS 版本（官網價格與功能）
+## 價格與服務聲明
 
-| 功能與費用 | 免費版 | Plus | Pro |
-|---|---:|---:|---:|
-| 價格 | NT$0 | NT$259／月 | NT$599／月 |
-| POS 結帳、庫存管理、員工帳號 | ✓ | ✓ | ✓ |
-| 離線營運 | ✓ | —（需連網） | —（需連網） |
-| 多機作業、多台出單機、手機報表 | — | ✓ | ✓ |
-| 會員系統、線上點餐、桌邊 QR Code 點餐 | — | — | ✓ |
-| 設備部署設定、操作教學、專屬客服 | — | ✓ | ✓ |
-| 金流模組與 Uber Eats 串接加購 | — | ✓ | ✓ |
+這次上傳的自訂首頁已將三種方案改為「開源免費版：NT$0」、「進階多工版：NT$299/月」、「線上專業版：NT$499/月」，本次保留這些修改。但同一頁仍含「尚未正式推出／價格未確認」等舊說明，`app.js` 中也保留規劃階段的對話提示；**是否正式提供付費方案，須由營運者自行確認**，在公開發行前請將首頁、FAQ、按鈕對話與正式服務契約的描述調整一致。本次未自行變更任何方案名稱、價格或功能。
 
-**加購模組（Plus／Pro 限定）**：全支付、LINE Pay 金流整合支援 POS 掃碼與線上付款，單個模組 NT$500（一次性），兩個合購 NT$800（一次性）。Uber Eats 串接模組 NT$99／月。第三方金流／外送平台自行收取的費用另計。
+## 設定下載網址
 
-上述資料已同步到首頁、比較表、FAQ、`llms.txt`、`terms.html` 以及 `index.html` 的 JSON-LD。日後調整價格／功能時，記得同步修改這些位置。
-
-## 使用正式網址 `https://oupos.app/`
-
-網站目前使用下列正規網址：
-- 官網 `https://oupos.app/`
-- 報價方案 `https://oupos.app/pricing`
-- FAQ `https://oupos.app/faq`
-- 聯絡 Email `support@oupos.app`；LINE 官方帳號 `@183fjvbn`（`https://line.me/R/ti/p/%40183fjvbn`）
-- 隱私權政策 `https://oupos.app/privacy`
-- 服務條款 `https://oupos.app/terms`
-- Sitemap `https://oupos.app/sitemap.xml`
-- robots `https://oupos.app/robots.txt`
-- llms 資訊 `https://oupos.app/llms.txt`
-
-如果正式網址不是 `https://oupos.app`，請搜尋替換專案中**所有**該網址（尤其是 canonical、OG、JSON-LD、sitemap、robots、llms）。同時設定網站主機將 www、pages.dev 等替代網址 301 重新導向至正式 canonical 網域，避免重複收錄。**本檔案無法代替你在 Cloudflare 的網域 DNS / Redirect Rules 設定。**
-
-## SEO / GEO 實作
-
-- 首頁、報價頁、FAQ 與兩個法律頁的唯一標題、描述、canonical、Open Graph 與分享圖。
-- 正確語言宣告 `zh-Hant`，首頁 `SoftwareApplication`、`WebSite`、`Organization`、`OfferCatalog` 和可見 FAQ 對應的 `FAQPage` JSON-LD；不虛構評論與評分。
-- 三種方案、費用、功能和答案寫在**原始 HTML 內**，不依賴 JavaScript 載入才能被讀到。
-- `robots.txt` 允許一般爬蟲，並提供 Sitemap URL。
-- `sitemap.xml` 採 sitemap.org 格式，收錄五個可索引的公開頁面。
-- `llms.txt` 供支援此格式的 AI 爬蟲參考；**它不是 Google 排名或 AI 引用保證**。
-
-部署成功後建議執行：
-1. 在瀏覽器確認上述每個 URL 都能正確開啟（不可回 404）。
-2. 以 Google Search Console 驗證 `oupos.app` 網域資產，提交 `https://oupos.app/sitemap.xml`。
-3. 使用 Google Rich Results Test / Schema Markup Validator 測試結構化資料，並用 URL Inspection 檢查可索引性。軟體應用程式富媒體搜尋結果可能要求真實評論／評分；本站未虛構評分。
-4. 用 Facebook 分享偵錯工具等確認 OG 圖片是否可供公開讀取。
-5. 定期更新內容、真正可用的下載連結，並保持網站資訊與實際方案一致。
-
-## 已修復「每一步，都看得見」白畫面
-
-改成六張預先匯出的 OUPOS POS 操作畫面 WebP，固定堆疊在同一個 `#story-screen` 容器內；JavaScript 只切換 `.is-current`，不重建結帳或報表介面，也不在捲動時修改圖片來源。CSS 使用 `aspect-ratio: 1040/570` 保持 iPhone Safari 的橫向畫面比例。即使 JavaScript 未載入也會顯示第 01 張展示圖片；正常載入後會依序呈現六段。
-
-現場交易功能**只由真正的 iPad POS App 處理**；官網展示所使用的資料與 POS 操作不會連線到你的正式付款或訂單 API。
-
-## 下載連結
-
-`app.js` 頂端的 `SITE_LINKS` 尚需填入你自己的真實網址：
+開啟 `app.js`，修改頂部的：
 
 ```js
 const SITE_LINKS = {
@@ -93,70 +27,110 @@ const SITE_LINKS = {
 };
 ```
 
-如果尚未設定這兩個連結，首頁按鈕會顯示提示對話框，而不是導向錯誤位置。**正式營運網站應在上線前設定可用的取得、訂閱或客服入口。** 報價獨立頁的 Plus 與 Pro 按鈕連到該頁客服區，沒有自行創造假的付款入口。
+只允許完整的 `https://` 網址。未填入時，按鈕會開啟「尚未設定」提示，不會跳到其他不明網站。
 
-## 隱私與法律文件
+## 本地開啟與部署
 
-`privacy.html` 與 `terms.html` 是現有提供的文件內容；其中仍有要以你的真實資訊填寫／核實的項目，例如**營運者法定名稱、個資聯絡 Email、保存期限、第三方服務與實際付款／取消方式**。這些內容請勿直接留白公開營運。這次同步更新服務條款的版本價格、服務內容及加購模組費用，但不是法律合規審查。
+網站包含：
 
-## 部署方式
+```
+index.html
+styles.css
+pos-demo.css
+app.js
+assets/favicon.svg
+```
 
-- **Cloudflare Pages**：解壓縮並上傳整個 `OUPOS-website/` 資料夾，網站入口檔為根目錄 `index.html`，Build command 留空。Cloudflare Pages 的 extensionless HTML 行為可提供 `/pricing`、`/faq`、`/privacy`、`/terms`。
-- **Nginx**：把檔案放入站點的 `root` 目錄，並在 `location /` 設定 `try_files $uri $uri.html $uri/ =404;` 以支援乾淨網址。部署前用 `nginx -t` 驗證設定，營業中應慎選重新載入的時機。
+不需要 Node.js、不需要資料庫、不需要 CDN 或第三方 JavaScript。
 
-本地測試：
+在網站資料夾執行：
 
 ```sh
-cd OUPOS-website
 python3 -m http.server 8080
 ```
 
-開啟 `http://localhost:8080`，注意 Python 內建靜態伺服器可能不自動將 `/privacy` 導向 `privacy.html`；需要在 Cloudflare Pages 或設定好路由的 Nginx 下測試乾淨網址。
+然後在瀏覽器開啟 `http://localhost:8080`。部署至 Nginx 時，將以上檔案放入站點的 `root` 路徑即可。Cloudflare Pages 可直接上傳網站資料夾，build command 留空。
+
+## 自訂
+
+- **品牌色**：`styles.css` 頂端的 `--blue`、`--blue-strong`、`--orange`。
+- **捲動故事文案**：`app.js` 的 `storySteps` 陣列。
+- **故事內容和示範訂單**：`app.js` 的 `createDemo`、`setStoryScene`。
+- **方案與價格**：`index.html` 的 `#pricing` 區塊。
+- **下載連結**：`app.js` 的 `SITE_LINKS`。
+
+## 使用說明及限制
+
+1. 介面上的商品、收款、報表和接單均為模擬資料，不會觸發真實交易。
+2. 網站的 App Store 和 GitHub 連結尚未提供，必須由管理者填寫。
+3. 正式方案與價格不可直接從本展示頁認定為商業承諾。
+4. 滑動故事使用原生 JavaScript、requestAnimationFrame、IntersectionObserver 和 CSS；不載入外部分析或追蹤 SDK。
+5. 使用系統字體，Apple 裝置上會以系統 San Francisco 呈現，非 Apple 裝置則自動 fallback。
 
 
-## 捲動展示（iPhone Safari 相容版）
+## 新增：隱私權政策與服務條款
 
-`assets/tour-01.webp` 至 `tour-06.webp` 為由 OUPOS POS 示範 UI 直接產生的展示圖片。
-網站會依六段捲動位置在 `#story-screen` 中切換六張 `.story-frame` 圖片的可見性；
-使用 `aspect-ratio: 1040/570` 保持螢幕比例，以避免某些 iOS Safari 版本將平板內容壓扁。
-若未來更改 POS 介面，請同步更新這六張圖片，並維持 1040×570 長寬比。
+本版本依據你上傳的 `index.html`、`styles.css`、`pos-demo.css`、`app(1).js` 修改，打包時將 `app(1).js` 更名為 `app.js`，以符合 HTML 原本的載入路徑。新增：
 
-模組加購卡片直接沿用 `.plan-card` 結構，與免費、Plus、Pro 方案一致。
+- `privacy.html`：隱私權政策草案，涵蓋網站展示、POS 資料、第三方服務、資料保存與當事人權利。
+- `terms.html`：服務條款草案，涵蓋免費開源、網站示範、付費服務、使用責任及變更。
+- `legal.css`：兩個法律頁面的響應式排版。
+- 官網頁尾：新增「隱私權政策」「服務條款」連結。
+
+**發布前必要事項（不可忽略）**
+
+1. 在 `privacy.html`、`terms.html` 中搜尋所有 `【...】` 佔位欄位，填入營運者法定名稱、真實聯絡信箱、資料使用／保留期限、地區、第三方供應商、授權資訊等。
+2. 核實正式 POS App 是否登入、採集手機／會員資料、使用相機／網路、連接付款或通知平台、將資料儲存於本機、商家伺服器或雲端；政策需與實際資料流、App Store Connect 隱私揭露一致。
+3. 將兩頁頂部的「正式發布前請確認」提示在資訊補齊與法律審閱完成後，視需要改為正式發布用文案。這兩頁目前是**草案**，不能直接視為已核實的法律聲明。
+4. 你提供的首頁目前標示「NT$299/月」「NT$499/月」，但同頁的方案說明仍稱「尚未推出」；這些文字是**按你原檔保留**，正式上線前應確認是否已開放訂購及價格條款是否一致。
+5. 本次順便修復 `index.html` 中首頁 hero 多餘的關閉標籤，以及線上專業版功能列表過早結束的 `</ul>`，不更改你的商品文案、品牌色、捲動動畫或價格。
+
+上線後公開網址為：`https://你的網域/privacy` 與 `https://你的網域/terms`。Apple App Store Connect 的 Privacy Policy URL 可填入前者，但需先核對正式 App 資料使用方式。
+
+### 不顯示 `.html` 的網址設定
+
+網站檔案**仍保留** `privacy.html`、`terms.html`（HTML 是網站檔案格式），但頁面上的所有公開連結都使用 `/privacy` 與 `/terms`，網址列不需要帶副檔名。
+
+**Cloudflare Pages：** 可直接上傳整個網站資料夾，無須設定額外規則。Pages 會自動將 `privacy.html` 對應到 `/privacy`，並把帶 `.html` 的請求導向無副檔名網址。
+
+**Nginx：** 請確認網站 `server` 中的靜態檔案 `location /` 使用：
+
+```nginx
+location / {
+    try_files $uri $uri.html $uri/ =404;
+}
+```
+
+若希望使用者直接輸入 `/privacy.html` 或 `/terms.html` 時也自動改成簡潔網址，可以在相同的 `server` 區塊額外加上：
+
+```nginx
+location = /privacy.html { return 301 /privacy; }
+location = /terms.html { return 301 /terms; }
+```
+
+修改 Nginx 前請先備份設定，執行 `nginx -t` 確認通過後再 reload。若與現有的應用路由或反向代理設定衝突，應依既有架構整合，不能直接覆蓋整個 `server` 區塊。
+
+**本機檢查：** 若使用 `python3 -m http.server`，該簡易伺服器不具備副檔名省略功能；本機可先使用 `/privacy.html`、`/terms.html` 預覽，部署到支援簡潔網址的環境才以 `/privacy`、`/terms` 對外提供。
+
+參考法規與平台文件：
+- 台灣《個人資料保護法》第 8 條：https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=I0050021
+- Apple App privacy：https://developer.apple.com/help/app-store-connect/reference/app-information/app-privacy
 
 
-## 2026-10-21 手機捲動平板修復
+## SwiftUI 對照更新（2026-10-19）
 
-- 六張 `assets/tour-01.webp`～`tour-06.webp` 現在固定放於橫向平板容器，透過 CSS 顯示／隱藏，不修改 `img.src`。
-- 使用 CSS `aspect-ratio: 1040/570` 鎖定橫向畫面比例，避免 iPhone Safari 將圖片繪製成錯誤尺寸。
-- 手機版重新分配平板、文字與控制按鈕的高度；不再以 JavaScript 強制設定平板高度。
-- 首頁 CSS、JS、展示圖帶有 `?v=20261021c` 版本參數，以防舊快取造成 JavaScript 與 CSS 混用。部署 Cloudflare Pages 後建議清除快取並重新整理手機頁面。
+這個版本已參考使用者提供的 OUPOS Xcode 專案：`DesignSystem.swift`、`CommonViews.swift`、`OrderView.swift`、`CheckoutView.swift`、`OnlineOrdersView.swift`、`ReportsView.swift`、`POSModels.swift`，把品牌色、POS 顶部導覽、三欄比例、商品卡片 86pt 最小高度、選商品後的配料面板、購物車選取樣式、結帳的桌號與出單開關、現金與數量鍵盤、線上訂單卡片、報表分頁等元素調整得更接近原始 SwiftUI 介面。
 
-
-## 2026-10-21 獨立報價／FAQ 與官方聯絡管道
-
-- 新增 `/pricing`、`/faq` 兩個獨立可索引的靜態頁面，並同步更新 `sitemap.xml`、`llms.txt`、Canonical、Open Graph 與 JSON-LD。
-- 首頁保持使用者指定的 Title `OUPOS｜POS系統`；新頁面分別為 `OUPOS 報價方案｜免費版、Plus、Pro` 和 `OUPOS 常見問題 FAQ｜功能、價格與客服`。
-- 首頁與獨立頁面新增聯絡區；全站頁尾及法律頁面新增真實客服電子郵件 `support@oupos.app` 和 LINE 官方帳號 `@183fjvbn`。
-- LINE 官方帳號連結採 LINE Developers 官方的好友頁 URL 格式 `https://line.me/R/ti/p/%40183fjvbn`。請上線前以實際 LINE App 確認所提供 ID 是否正確。
-- 隱私條款仍包含若干必須由營運者核實的法定名稱、資料保存時間與外部服務細節占位項。僅替換已收到的真實聯絡信箱，沒有捏造營運者姓名。
-- 本更新**不影響原本的六階段 iPhone POS 操作展示程式**。
+注意：這是 **HTML/CSS/JS 重新實作的展示版**，不是 SwiftUI App 的逐像素截圖，也沒有連接 POS 真實 API、商家資料庫、付款、攝影機或印表機。商品、店名、金額、訂單均為獨立示意資料；不包含 Xcode 專案原始程式碼、憑證或私人伺服器設定。獨立法律頁 `/privacy`、`/terms` 與原本網站方案設定均保留。
 
 
-## Apple 設計重製（保留 OUPOS 主題色）
+### 網頁版結帳完成流程
 
-本次依 `DESIGN-apple.md` 重製全站 UI，主要設計措施：
-
-- 恢復 44px 黑色全站導覽 + 52px 霧面產品次導覽，行動裝置使用可展開選單。
-- 標題改用 SF Pro Display／系統字體、大字距與大留白，避免大量裝飾標籤及陰影。
-- FAQ 獨立頁：白色產品介紹首屏、淺灰背景的 15 題分組展開、深色產品展示、白色聯絡區。
-- 報價獨立頁：大標題與真實 POS 展示、免費／Plus／Pro 三方案、功能比較、模組加購、深色收尾及聯絡資訊。
-- 保留 **OUPOS 原品牌主題藍 `#8EAFCA`、重點藍 `#7E9FBC`、品牌橘 `#FF8A45`**。深藍 `#405C74` 用於小型文字連結，改善白底上的對比。Apple 規範中 `#0066CC` 不取代 OUPOS 品牌。
-- `apple-ui.css` 在各頁原有 CSS 之後載入。未變動 `app.js` 的操作邏輯及六張 POS 展示圖。
-- 已在 Chromium 桌機及手機模擬 viewport 測試首頁、FAQ、報價、隱私與服務條款；**仍建議在 iPhone Safari 上實際驗證**。
-
-本次改動屬於原始碼與視覺實作更新，沒有直接部署到你的 Cloudflare Pages。
+選擇商品與配料 → 結帳 → 選支付方式與桌號 → 現金時輸入實收金額 → 下單 → 顯示「結帳完成」及訂單摘要 → 「下一筆訂單」清空本次購物車並重置付款狀態。此功能僅在瀏覽器記憶體中更新，不涉及任何金流或後端 API。使用者導向的操作畫面不另外放置說明提示。
 
 
-## Google OAuth 隱私權政策補強（2026-10-21）
+## 模組報價區（新增）
 
-`privacy.html` 已分別載明 Google 基本登入資料類別、用途、儲存與權杖處理、第三方分享、保存原則、撤銷授權及刪除流程，並維持 Apple 風格與品牌色。**部署及重新申請驗證前，請先核對 `GOOGLE-OAUTH-發布前核對清單.md`，尤其是實際 Google OAuth scopes、認證服務商與保存/刪除流程；這些資訊尚未由已提供的原始碼確認。**
+在 `index.html` 的 `#modules` 區段新增獨立「客製化模組報價」：菜單匯入、出單設備、顧客顯示器、第三方串接、客製報表與其他開發。不同於 `#pricing` 的月費訂閱方案，這裡展示的是**獨立的一次性服務或個案專案詢價**。由於尚未提供各模組的核定價格，網站不填寫虛構價目。使用者可複選需求、查看清單，並複製成詢價訊息。
+
+如需新增模組，請同步調整 `index.html` 的 `.module-item` 與 `data-module-name`，並在 `styles.css` 修改 `.module-*` 樣式；`app.js` 底部 `setupModuleQuote` 負責勾選與複製。此功能不會送出資料或改動 POS 結帳示範。

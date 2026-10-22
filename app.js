@@ -234,10 +234,16 @@ function createDemo(root){
 
 /* ---------- Product-site interactions ---------- */
 const demos={};
-for(const id of ['hero-pos']){
+for(const id of ['hero-pos','story-pos','showcase-pos']){
   const el=document.getElementById(id);
   if(el)demos[id]=createDemo(el);
 }
+const tabs=[...document.querySelectorAll('.showcase-option')];
+function selectDemoTab(view){
+  demos['showcase-pos']?.setView(view);
+  tabs.forEach(btn=>{const active=btn.dataset.view===view;btn.classList.toggle('active',active);btn.setAttribute('aria-selected',String(active));btn.tabIndex=active?0:-1;});
+}
+tabs.forEach(btn=>btn.addEventListener('click',()=>selectDemoTab(btn.dataset.view)));
 const menuToggle=document.querySelector('.menu-toggle');
 const mobileMenu=document.querySelector('#mobile-menu');
 menuToggle?.addEventListener('click',()=>{const opening=mobileMenu.hidden;mobileMenu.hidden=!opening;menuToggle.setAttribute('aria-expanded',String(opening));menuToggle.setAttribute('aria-label',opening?'關閉網站選單':'開啟網站選單');});
@@ -254,59 +260,37 @@ if('IntersectionObserver' in window){
 }else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in-view'));}
 
 const storySteps=[
-  {kicker:'選擇商品',title:'商品就在眼前。',description:'打開點餐畫面，分類和商品清楚排列，點一下就能開始。'},
-  {kicker:'加入購物車',title:'點一下。\n立即加入。',description:'商品與金額同步出現在右側購物車，不離開目前的操作畫面。'},
-  {kicker:'調整配料',title:'想加蛋？\n就這麼簡單。',description:'加蛋、加起司和數量變更，金額跟著即時更新。'},
-  {kicker:'現金結帳',title:'收款清楚。\n找零也清楚。',description:'一眼對照總計、實收及找零；現金鍵盤也能直接輸入。'},
-  {kicker:'線上訂單',title:'新訂單到了。\n不用手忙腳亂。',description:'線上訂單集中呈現，餐點、金額與接單操作都在同一畫面。'},
-  {kicker:'營運報表',title:'每天的成果，\n一目了然。',description:'營收、訂單數與付款方式統計，讓管理資訊回到簡潔明瞭。'}
+  {kicker:'選擇商品',title:'商品就在眼前。',description:'打開點餐畫面，分類和商品清楚排列，點一下就能開始。',callout:'01 · 商品分類'},
+  {kicker:'加入購物車',title:'點一下。\n立即加入。',description:'商品與金額同步出現在右側購物車，不離開目前的操作畫面。',callout:'02 · 購物車即時更新'},
+  {kicker:'調整配料',title:'想加蛋？\n就這麼簡單。',description:'加蛋、加起司和數量變更，金額跟著即時更新。',callout:'03 · 配料與數量'},
+  {kicker:'現金結帳',title:'收款清楚。\n找零也清楚。',description:'一眼對照總計、實收及找零；現金鍵盤也能直接輸入。',callout:'04 · 找零即時計算'},
+  {kicker:'線上訂單',title:'新訂單到了。\n不用手忙腳亂。',description:'線上訂單集中呈現，餐點、金額與接單操作都在同一畫面。',callout:'05 · 線上訂單'},
+  {kicker:'營運報表',title:'每天的成果，\n一目了然。',description:'營收、訂單數與付款方式統計，讓管理資訊回到簡潔明瞭。',callout:'06 · 營運報表'}
 ];
 const storyTrack=document.getElementById('story-track');
-const storySticky=storyTrack?.querySelector('.story-sticky');
-const storyTablet=storyTrack?.querySelector('.story-tablet');
 const storyCopy=document.getElementById('story-wording');
 const storyTitle=document.getElementById('story-title');
 const storyDescription=document.getElementById('story-description');
 const storyKicker=document.getElementById('story-kicker');
 const storyNumber=document.getElementById('story-number');
+const storyCallout=document.getElementById('story-callout');
 const storyFill=document.getElementById('story-progress-fill');
 const storyBar=document.getElementById('story-progressbar');
-const storyScreen=document.getElementById('story-screen');
-const storyFrames=[...document.querySelectorAll('.story-frame')];
-const tourImages=Array.from({length:6},(_,i)=>`assets/tour-${String(i+1).padStart(2,'0')}.webp`);
-const tourAlt=[
-  'OUPOS POS 商品分類與商品網格',
-  'OUPOS POS 商品加入購物車與總計',
-  'OUPOS POS 調整配料、商品數量和價格',
-  'OUPOS POS 現金結帳與找零',
-  'OUPOS POS 線上訂單管理',
-  'OUPOS POS 營運報表與付款統計'
-];
-// All six optimized images are already mounted inside a fixed-ratio screen.
-// Scroll updates never change an image URL or its intrinsic dimensions.
 let activeScene=-1,scrollQueued=false;
-const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
 function changeScene(scene){
-  const n=clamp(scene,0,storySteps.length-1);
+  const n=Math.max(0,Math.min(storySteps.length-1,scene));
   if(n===activeScene)return;
-  activeScene=n;
-  const info=storySteps[n];
+  activeScene=n;const info=storySteps[n];
+  storyCopy?.classList.add('switching');
   storyTrack?.setAttribute('data-scene',String(n));
-  if(storyScreen)storyScreen.setAttribute('aria-label',tourAlt[n]);
-  storyFrames.forEach((frame,i)=>frame.classList.toggle('is-current',i===n));
+  demos['story-pos']?.setStoryScene(n);
   if(storyNumber)storyNumber.textContent=String(n+1).padStart(2,'0');
   if(storyKicker)storyKicker.textContent=info.kicker;
   if(storyTitle)storyTitle.innerHTML=info.title.replaceAll('\n','<br>');
   if(storyDescription)storyDescription.textContent=info.description;
+  if(storyCallout)storyCallout.innerHTML='<span class="callout-dot"></span>'+info.callout;
   storyBar?.setAttribute('aria-valuenow',String(n+1));
-  // Animate only on scene changes, not on every scroll event.
-  if(storyCopy && !lessMotion.matches && storyCopy.animate){
-    storyCopy.getAnimations().forEach(a=>a.cancel());
-    storyCopy.animate([
-      {opacity:.55,transform:'translate3d(0,8px,0)'},
-      {opacity:1,transform:'translate3d(0,0,0)'}
-    ],{duration:280,easing:'cubic-bezier(.2,.8,.2,1)'});
-  }
+  requestAnimationFrame(()=>storyCopy?.classList.remove('switching'));
 }
 function fitHero(){
   const slot=document.querySelector('.hero-app-crop');
@@ -314,47 +298,41 @@ function fitHero(){
   if(!slot||!view)return;
   view.style.transform=`scale(${slot.clientWidth/1040})`;
 }
-// The tablet height comes from CSS ratio padding, never JavaScript measurement.
+function fitStory(){
+  const slot=document.querySelector('.story-screen-slot');
+  const view=document.getElementById('story-pos');
+  if(!slot||!view)return;
+  const scale=slot.clientWidth/1040;
+  slot.style.height=`${Math.max(1,570*scale)}px`;
+  view.style.transform=`scale(${scale})`;
+}
 function getStoryDimensions(){
-  if(!storyTrack)return {top:0,max:1};
   const top=window.scrollY+storyTrack.getBoundingClientRect().top;
-  const visibleHeight=storySticky?.offsetHeight || window.innerHeight;
-  return {top,max:Math.max(1,storyTrack.offsetHeight-visibleHeight)};
+  const max=Math.max(1,storyTrack.offsetHeight-window.innerHeight+52);
+  return {top,max};
 }
 function updateStory(){
-  scrollQueued=false;
-  if(!storyTrack)return;
+  scrollQueued=false;if(!storyTrack)return;
   const {top,max}=getStoryDimensions();
-  const progress=clamp((window.scrollY-top)/max,0,1);
-  const step=Math.min(storySteps.length-1,Math.floor(progress*storySteps.length));
-  // Keep one physical image in the tablet so iOS can always paint it.
-  changeScene(step);
-  if(storyFill)storyFill.style.transform=`scaleX(${progress})`;
-  if(storyTablet){
-    if(window.innerWidth>833&&!lessMotion.matches){
-      const y=(1-progress)*10;
-      storyTablet.style.transform=`translate3d(0,${y.toFixed(2)}px,0) scale(${(.992+progress*.008).toFixed(4)})`;
-    } else {
-      storyTablet.style.transform='none';
-    }
-  }
+  const progress=Math.max(0,Math.min(1,(window.scrollY-top)/max));
+  const scene=Math.min(5,Math.floor(progress*6));
+  changeScene(scene);
+  storyTrack.style.setProperty('--cinema-progress',String(progress));
+  if(storyFill)storyFill.style.width=`${Math.max(1,Math.min(100,progress*100))}%`;
 }
 function onScroll(){if(!scrollQueued){scrollQueued=true;requestAnimationFrame(updateStory);}}
 function goToScene(n){
-  const idx=clamp(n,0,storySteps.length-1);
+  const idx=Math.min(5,Math.max(0,n));
+  changeScene(idx);
   const {top,max}=getStoryDimensions();
-  window.scrollTo({top:top+max*((idx+.30)/storySteps.length),behavior:lessMotion.matches?'instant':'smooth'});
+  window.scrollTo({top:top+max*((idx+.26)/6),behavior:lessMotion.matches?'instant':'smooth'});
 }
 document.getElementById('story-prev')?.addEventListener('click',()=>goToScene(activeScene-1));
 document.getElementById('story-next')?.addEventListener('click',()=>goToScene(activeScene+1));
 window.addEventListener('scroll',onScroll,{passive:true});
-window.addEventListener('pageshow',onScroll,{passive:true});
-window.addEventListener('resize',()=>{fitHero();onScroll();},{passive:true});
-if('ResizeObserver' in window){
-  new ResizeObserver(fitHero).observe(document.querySelector('.hero-app-crop'));
-}
-// Prepare every operation screen once. No DOM changes inside the scrolling loop.
-fitHero();onScroll();
+window.addEventListener('resize',()=>{fitStory();fitHero();onScroll();},{passive:true});
+if('ResizeObserver' in window){new ResizeObserver(()=>fitStory()).observe(document.querySelector('.story-screen-slot'));new ResizeObserver(()=>fitHero()).observe(document.querySelector('.hero-app-crop'));}
+fitStory();fitHero();changeScene(0);onScroll();
 
 const SITE_DIALOG=document.getElementById('info-dialog');
 const dialogTitle=document.getElementById('info-dialog-title');
@@ -368,7 +346,50 @@ for(const a of document.querySelectorAll('[data-external]')){
   if(url&&/^https:\/\//i.test(url)){a.href=url;a.target='_blank';a.rel='noopener noreferrer';}
   else a.addEventListener('click',ev=>{ev.preventDefault();openInfo(key==='appStore'?'App Store 連結尚未設定':'GitHub 連結尚未設定','請在 app.js 的 SITE_LINKS 填入已確認的正式公開網址。');});
 }
+for(const btn of document.querySelectorAll('[data-plan-dialog]')){
+  btn.addEventListener('click',()=>openInfo('方案資訊','請參閱本頁方案比較。實際服務內容與申辦方式，以 OUPOS 正式公告為準。'));
+}
 document.getElementById('dialog-close')?.addEventListener('click',()=>SITE_DIALOG?.close());
 document.getElementById('dialog-ok')?.addEventListener('click',()=>SITE_DIALOG?.close());
 SITE_DIALOG?.addEventListener('click',e=>{if(e.target===SITE_DIALOG)SITE_DIALOG.close();});
 const year=document.getElementById('year');if(year)year.textContent=String(new Date().getFullYear());
+
+
+/* Independently scoped module quotation selector (does not change plan pricing). */
+(function setupModuleQuote(){
+  const selectors=[...document.querySelectorAll('.module-checkbox')];
+  const count=document.getElementById('module-selected-count');
+  const list=document.getElementById('module-selection');
+  const copyButton=document.getElementById('module-copy-request');
+  const status=document.getElementById('module-copy-status');
+  if(!count||!list||!copyButton||!status||!selectors.length)return;
+  const chosen=()=>selectors.filter(el=>el.checked).map(el=>el.dataset.moduleName);
+  function renderSelection(){
+    const selection=chosen();
+    count.textContent=selection.length+' 項';
+    copyButton.disabled=selection.length===0;
+    list.replaceChildren();
+    if(selection.length===0){const item=document.createElement('li');item.className='module-no-selection';item.textContent='先從左側挑選你需要的模組。';list.append(item);}
+    else selection.forEach(name=>{const item=document.createElement('li');item.textContent=name;list.append(item);});
+    status.textContent='';
+    status.parentElement.querySelector('.module-copy-fallback')?.remove();
+  }
+  selectors.forEach(el=>el.addEventListener('change',renderSelection));
+  copyButton.addEventListener('click',async()=>{
+    const selection=chosen();
+    if(!selection.length)return;
+    const request='OUPOS 客製化模組需求清單\n\n'+selection.map((name,i)=>(i+1)+'. '+name).join('\n')+'\n\n請依實際設備、環境與開發範圍提供獨立報價（不等同標準月費方案）。';
+    try{
+      if(!navigator.clipboard?.writeText)throw new Error('Clipboard API unavailable');
+      await navigator.clipboard.writeText(request);
+      status.textContent='需求清單已複製，可以貼到聯絡訊息中。';
+    }catch(error){
+      status.parentElement.querySelector('.module-copy-fallback')?.remove();
+      const field=document.createElement('textarea');field.className='module-copy-fallback';field.value=request;field.setAttribute('aria-label','請複製需求清單');
+      field.style.cssText='width:100%;min-height:120px;margin-top:12px;border:1px solid #9cb5c9;border-radius:9px;padding:10px;font:inherit;font-size:12px;';
+      status.textContent='複製受瀏覽器限制，請選取下方文字手動複製：';
+      status.after(field);field.focus();field.select();
+    }
+  });
+  renderSelection();
+})();
