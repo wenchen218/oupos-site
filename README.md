@@ -134,3 +134,24 @@ location = /terms.html { return 301 /terms; }
 在 `index.html` 的 `#modules` 區段新增獨立「客製化模組報價」：菜單匯入、出單設備、顧客顯示器、第三方串接、客製報表與其他開發。不同於 `#pricing` 的月費訂閱方案，這裡展示的是**獨立的一次性服務或個案專案詢價**。由於尚未提供各模組的核定價格，網站不填寫虛構價目。使用者可複選需求、查看清單，並複製成詢價訊息。
 
 如需新增模組，請同步調整 `index.html` 的 `.module-item` 與 `data-module-name`，並在 `styles.css` 修改 `.module-*` 樣式；`app.js` 底部 `setupModuleQuote` 負責勾選與複製。此功能不會送出資料或改動 POS 結帳示範。
+
+
+## Apple App Store 審核用公開頁面（2026-10-22）
+
+這一版使用你提供的 `oupos-site-main.zip` 為基礎。原有首頁、報價、模組詢價、FAQ、互動 POS、圖片及樣式均保留。
+
+- `oupos-privacy.html` → Cloudflare Pages：`https://oupos.app/oupos-privacy`
+- `oupos-support.html` → Cloudflare Pages：`https://oupos.app/oupos-support`
+- `app-review.css` → 兩個頁面的響應式樣式，配色對齊 OUPOS 品牌。
+- 原有 `privacy.html` 是較早期的**網站服務草案**（內含待核實欄位），不應填入 App Store Connect。首頁已改為導向 App 專屬的 `oupos-privacy`。
+- 主網站的 `terms.html` 仍保留，以免覆蓋已有的服務條款頁。
+- 新增頁面使用開發者名稱 `Lichueh Weng`、客服信箱 `support@oupos.app`、日期 `2026-10-22`、Bundle ID `app.oupos`。
+- 以使用者此次提供的「App 本機儲存、無雲端帳號登入、Keychain、區網 TCP 列印、外部 AI JSON 匯入及手動備份」為準；**這個 App 專屬的聲明，不代表官網示範中的其他方案或服務具有相同資料處理方式**。
+
+### 部署方式
+
+**Cloudflare Pages**：將此網站資料夾內容（`index.html` 必須在上傳根層）直接上傳；Pages 會將 `oupos-privacy.html` 對應至 `/oupos-privacy`，`oupos-support.html` 對應至 `/oupos-support`。
+
+**GitHub Pages**：使用另附的 `OUPOS-官網-GitHub-Pages版.zip`。GitHub Pages 標準靜態託管採資料夾式路由，正式頁面會以 `/oupos-privacy/` 和 `/oupos-support/` 形式提供，沒有 `.html`，但有結尾斜線。此版本也將既有的報價、FAQ、服務條款等根相對 URL 改為相對網址，以適應專案子路徑。
+
+網址及 App Store Connect 的填寫請以**部署後公開可以正常瀏覽的實際 URL**為準。本檔案僅是靜態網站，並不保證審核通過；請再次核對 App 真正的資料處理行為和 App Store Connect 隱私權申報一致。
